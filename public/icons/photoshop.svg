@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Adobe Photoshop</title>
+  <rect width="64" height="64" rx="14" fill="#001E36"/>
+  <rect x="4" y="4" width="56" height="56" rx="11" fill="none" stroke="#31A8FF" stroke-width="5"/>
+  <text x="31" y="41" fill="#31A8FF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" text-anchor="middle">Ps</text>
+</svg>
