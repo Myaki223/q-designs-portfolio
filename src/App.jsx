@@ -20,7 +20,7 @@ function App() {
       <CreativeBackground />
       <div className="relative z-10">
         <Navbar />
-        <main className="pt-32 md:pt-24">
+        <main className="pt-24">
           <Hero />
           <RevealOnScroll>
             <ProjectsCarousel />
