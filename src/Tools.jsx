@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'motion/react'
 import ToolCategoryCard from './components/ToolCategoryCard.jsx'
 import { toolCategories, toolboxNotes } from './data/tools.js'
+import { FaRobot } from "react-icons/fa6";
 
 function Tools() {
   const [activeCategory, setActiveCategory] = useState(null)
