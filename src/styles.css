@@ -1,14 +1,95 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-editorial: "Newsreader", Georgia, "Times New Roman", serif;
+  --color-canvas: #000000;
+  --color-panel: #0a0a0a;
+  --color-surface: #141414;
+  --color-ink: #ffffff;
+  --color-copy: #d4d4d4;
+  --color-muted: #888888;
+  --color-line: #292929;
+  --color-highlight: #ffffff;
+  --color-silver: #b8b8b8;
+}
+
 :root {
-  color-scheme: light;
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  color-scheme: dark;
+  --studio-rgb: 255, 255, 255;
+  --silver-rgb: 184, 184, 184;
+  --surface-rgb: 20, 20, 20;
+  --panel-rgb: 10, 10, 10;
+  --canvas-rgb: 0, 0, 0;
+  --glass-gradient: linear-gradient(135deg, rgba(var(--surface-rgb), 0.94), rgba(var(--surface-rgb), 0.78), rgba(var(--panel-rgb), 0.94));
+  --glass-raised-gradient: linear-gradient(135deg, rgba(var(--surface-rgb), 0.94), rgba(41, 41, 41, 0.78), rgba(var(--surface-rgb), 0.94));
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0.01em;
+  word-spacing: 0.025em;
+}
+
+@layer base {
+  h1, h2, h3 {
+    letter-spacing: 0;
+    word-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  button, input, textarea, select {
+    font-family: inherit;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+}
+
+@utility editorial-accent {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+.hero-title {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.hero-readability-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -4rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.25) 25%,
+    rgba(0, 0, 0, 0.7) 48%,
+    rgba(0, 0, 0, 0.88) 64%,
+    rgba(0, 0, 0, 0.5) 80%,
+    transparent 100%
+  );
+}
+
+@utility surface-glass {
+  background-image: var(--glass-gradient);
+}
+
+@utility surface-glass-raised {
+  background-image: var(--glass-raised-gradient);
+}
+
+::selection {
+  color: var(--color-canvas);
+  background: var(--color-copy);
 }
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  scrollbar-color: rgba(255, 255, 255, 0.28) #000000;
 }
 
 html.lenis,

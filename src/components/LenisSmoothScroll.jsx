@@ -4,7 +4,7 @@ import Lenis from 'lenis'
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-function LenisSmoothScroll() {
+function LenisSmoothScroll({ stopped = false }) {
   useEffect(() => {
     if (prefersReducedMotion()) {
       return undefined
@@ -24,6 +24,12 @@ function LenisSmoothScroll() {
       delete window.__qDesignsLenis
     }
   }, [])
+
+  useEffect(() => {
+    const lenis = window.__qDesignsLenis
+    if (stopped) lenis?.stop()
+    else lenis?.start()
+  }, [stopped])
 
   return null
 }

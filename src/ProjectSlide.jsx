@@ -24,7 +24,7 @@ function ProjectSlide({ project, direction, onNext, onPrevious, onViewProject })
   return (
     <motion.article
       key={project.id}
-      className="group relative grid overflow-hidden rounded-lg border border-white/10 bg-[linear-gradient(135deg,rgba(14,26,43,0.92),rgba(14,26,43,0.78),rgba(3,7,18,0.94))] shadow-2xl shadow-black/45 backdrop-blur-xl lg:grid-cols-[0.78fr_1.22fr]"
+      className="group relative grid overflow-hidden rounded-lg border border-line surface-glass shadow-2xl shadow-black/45 backdrop-blur-xl lg:grid-cols-[0.78fr_1.22fr]"
       custom={direction}
       initial={
         shouldReduceMotion
@@ -48,11 +48,11 @@ function ProjectSlide({ project, direction, onNext, onPrevious, onViewProject })
       aria-label={`${project.number}. ${project.title}`}
     >
       <div
-        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-blue-400/10 blur-3xl"
+        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-silver/10 blur-3xl"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -bottom-28 left-10 h-64 w-64 rounded-full bg-cyan-200/10 blur-3xl"
+        className="pointer-events-none absolute -bottom-28 left-10 h-64 w-64 rounded-full bg-silver/10 blur-3xl"
         aria-hidden="true"
       />
       <div
@@ -60,41 +60,27 @@ function ProjectSlide({ project, direction, onNext, onPrevious, onViewProject })
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex min-h-[420px] flex-col justify-between p-6 sm:p-8 lg:p-10">
+      <div className="relative z-10 flex flex-col justify-center gap-6 p-6 sm:gap-8 sm:p-8 lg:p-10">
         <div>
           <div className="flex items-center justify-between gap-4">
-            <span className="text-5xl font-black leading-none text-white/12 sm:text-6xl">
+            <span className="text-5xl font-semibold leading-none text-muted sm:text-6xl">
               {project.number}
             </span>
-            <span className="rounded-full border border-white/10 bg-white/8 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-white/55 backdrop-blur">
+            <span className="rounded-full border border-line bg-white/8 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.1em] text-muted backdrop-blur">
               {project.year}
             </span>
           </div>
 
-          <p className="mt-8 text-xs font-black uppercase tracking-[0.22em] text-sky-300">
+          <p className="mt-6 text-xs font-medium uppercase tracking-[0.1em] text-ink">
             {project.category}
           </p>
-          <h3 className="mt-3 max-w-lg text-4xl font-black leading-[1.02] text-white sm:text-5xl">
+          <h3 className="mt-4 max-w-lg text-4xl font-medium leading-[1.25] text-ink sm:text-5xl">
             {project.title}
           </h3>
-          <p className="mt-5 max-w-xl text-sm leading-7 text-[#CBD5E1] sm:text-base">
-            {project.description}
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-white/10 bg-white/[0.08] px-3 py-1.5 text-xs font-bold text-white/70 shadow-sm shadow-black/10 backdrop-blur transition group-hover:border-sky-100/20 group-hover:text-sky-50"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
         </div>
 
         <div
-          className="relative mt-8 w-fit"
+          className="relative w-fit"
           onMouseEnter={() => setIsPreviewVisible(true)}
           onMouseLeave={() => setIsPreviewVisible(false)}
         >
@@ -112,7 +98,7 @@ function ProjectSlide({ project, direction, onNext, onPrevious, onViewProject })
             onFocus={() => setIsPreviewVisible(true)}
             onBlur={() => setIsPreviewVisible(false)}
             onPointerDown={(event) => event.stopPropagation()}
-            className="relative z-10 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white px-5 py-3 text-sm font-black text-slate-950 shadow-lg shadow-black/25 transition hover:-translate-y-0.5 hover:bg-sky-100 hover:shadow-xl hover:shadow-sky-500/20 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+            className="relative z-10 inline-flex items-center gap-2 rounded-full border border-line bg-white px-5 py-3 text-sm font-medium text-canvas shadow-lg shadow-black/25 transition hover:-translate-y-0.5 hover:bg-copy hover:shadow-xl hover:shadow-white/10 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
           >
             View Project
             <FiArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -121,19 +107,19 @@ function ProjectSlide({ project, direction, onNext, onPrevious, onViewProject })
       </div>
 
       <div className="relative z-10 p-3 sm:p-4 lg:p-5">
-        <div className="relative overflow-hidden rounded-lg border border-white/10 bg-black/35 p-3 shadow-2xl shadow-black/35 backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-lg border border-line bg-canvas/35 p-3 shadow-2xl shadow-black/35 backdrop-blur-xl">
           <div
-            className="pointer-events-none absolute inset-4 rounded-lg bg-sky-300/12 opacity-70 blur-3xl transition duration-500 group-hover:opacity-100"
+            className="pointer-events-none absolute inset-4 rounded-lg bg-silver/12 opacity-70 blur-3xl transition duration-500 group-hover:opacity-100"
             aria-hidden="true"
           />
-          <div className="pointer-events-none absolute left-5 top-5 z-20 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-sky-100 opacity-0 shadow-lg shadow-black/20 backdrop-blur transition duration-300 group-hover:opacity-100">
+          <div className="pointer-events-none absolute left-5 top-5 z-20 rounded-full border border-line bg-canvas/60 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.1em] text-ink opacity-0 shadow-lg shadow-black/20 backdrop-blur transition duration-300 group-hover:opacity-100">
             {project.category}
           </div>
           <ProjectImageSlider
             images={project.images}
             title={project.title}
             fallbackCaption={project.description}
-            className="aspect-[4/3] rounded-lg lg:min-h-[500px]"
+            className="aspect-[4/3] rounded-lg"
           />
         </div>
       </div>

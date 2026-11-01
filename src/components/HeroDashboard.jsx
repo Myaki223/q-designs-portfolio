@@ -34,7 +34,7 @@ const navItems = [
     label: 'Tools',
     sectionId: 'tools',
     icon: FiTool,
-    position: 'lg:left-[26%] xl:left-[31%] lg:bottom-[4%]',
+    position: 'lg:right-[2%] xl:right-[8%] lg:top-[38%]',
     delay: 0.26,
   },
   {
@@ -56,7 +56,7 @@ function DashboardNavCard({ item }) {
     <motion.button
       type="button"
       onClick={() => scrollToSection(item.sectionId)}
-      className={`group relative z-30 flex min-h-20 cursor-pointer flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border border-white/10 bg-black/30 p-3 text-center shadow-xl shadow-black/25 outline-none backdrop-blur-xl transition hover:border-sky-200/30 hover:bg-white/10 hover:shadow-blue-500/10 focus-visible:ring-2 focus-visible:ring-sky-300/70 sm:min-h-24 sm:p-4 lg:absolute lg:w-[96px] xl:w-[104px] ${item.position}`}
+      className={`group relative z-30 flex min-h-20 cursor-pointer flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border border-line bg-canvas/30 p-3 text-center shadow-xl shadow-black/25 outline-none backdrop-blur-xl transition hover:border-highlight/30 hover:bg-white/10 hover:shadow-white/10 focus-visible:ring-2 focus-visible:ring-highlight/70 sm:min-h-24 sm:p-4 lg:absolute lg:w-[96px] xl:w-[104px] ${item.position}`}
       initial={{ opacity: 0, y: 14, scale: 0.92 }}
       animate={
         shouldReduceMotion
@@ -77,12 +77,12 @@ function DashboardNavCard({ item }) {
       whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
       aria-label={`Go to ${item.label} section`}
     >
-      <span className="absolute inset-0 rounded-lg bg-[radial-gradient(circle_at_50%_0%,rgba(147,197,253,0.22),transparent_55%)] opacity-0 transition duration-300 group-hover:opacity-100" />
-      <span className="absolute inset-x-4 -bottom-5 h-8 rounded-full bg-sky-300/20 opacity-0 blur-xl transition duration-300 group-hover:opacity-100" />
-      <span className="relative flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.07] text-sky-100 shadow-lg shadow-black/20 transition group-hover:bg-white/12 group-hover:text-white group-hover:drop-shadow-[0_0_14px_rgba(96,165,250,0.4)]">
+      <span className="absolute inset-0 rounded-lg bg-[radial-gradient(circle_at_50%_0%,rgba(var(--studio-rgb),0.121),transparent_55%)] opacity-0 transition duration-300 group-hover:opacity-100" />
+      <span className="absolute inset-x-4 -bottom-5 h-8 rounded-full bg-silver/20 opacity-0 blur-xl transition duration-300 group-hover:opacity-100" />
+      <span className="relative flex h-11 w-11 items-center justify-center rounded-lg border border-line bg-white/[0.07] text-ink shadow-lg shadow-black/20 transition group-hover:bg-white/12 group-hover:text-ink group-hover:drop-shadow-[0_0_14px_rgba(var(--studio-rgb),0.22)]">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
-      <span className="relative text-xs font-black uppercase tracking-[0.14em] text-white/75 transition group-hover:text-white">
+      <span className="relative text-xs font-medium uppercase tracking-[0.1em] text-copy transition group-hover:text-ink">
         {item.label}
       </span>
     </motion.button>
@@ -137,51 +137,34 @@ function HeroDashboard() {
     >
       <div className="relative min-h-[760px] px-0 pb-6 pt-2 sm:min-h-[840px] lg:min-h-[760px] lg:pt-8">
         <div
-          className="pointer-events-none absolute left-1/2 top-[45%] h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_42%_24%,rgba(255,255,255,0.13),rgba(30,64,175,0.32)_42%,rgba(3,7,18,0.6)_72%,transparent_76%)] shadow-2xl shadow-black/45 sm:h-[34rem] sm:w-[34rem] lg:top-[49%] lg:h-[38rem] lg:w-[38rem]"
+          className="pointer-events-none absolute left-1/2 top-[45%] h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_42%_24%,rgba(255,255,255,0.13),rgba(var(--studio-rgb),0.176)_42%,rgba(0,0,0,0.6)_72%,transparent_76%)] shadow-2xl shadow-black/45 sm:h-[34rem] sm:w-[34rem] lg:top-[49%] lg:h-[38rem] lg:w-[38rem]"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute left-1/2 top-[45%] h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-100/10 sm:h-[38rem] sm:w-[38rem] lg:top-[49%] lg:h-[42rem] lg:w-[42rem]"
+          className="pointer-events-none absolute left-1/2 top-[45%] h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-highlight/10 sm:h-[38rem] sm:w-[38rem] lg:top-[49%] lg:h-[42rem] lg:w-[42rem]"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute left-1/2 top-[45%] h-80 w-[88vw] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.15),rgba(30,64,175,0.07)_45%,transparent_72%)] blur-3xl lg:top-[46%] lg:h-[30rem]"
+          className="pointer-events-none absolute left-1/2 top-[45%] h-80 w-[88vw] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(var(--studio-rgb),0.083),rgba(var(--studio-rgb),0.039)_45%,transparent_72%)] blur-3xl lg:top-[46%] lg:h-[30rem]"
           aria-hidden="true"
         />
         <motion.div
-          className="pointer-events-none absolute left-1/2 top-[46%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-300/16 blur-3xl sm:h-80 sm:w-80"
+          className="pointer-events-none absolute left-1/2 top-[46%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-silver/16 blur-3xl sm:h-80 sm:w-80"
           style={{ x: portraitGlowX, y: portraitGlowY }}
           aria-hidden="true"
         />
 
         <div className="relative z-40 max-w-xl lg:absolute lg:right-0 lg:top-0 lg:max-w-[410px] lg:text-right xl:right-6 xl:max-w-[460px]">
           <motion.p
-            className="inline-flex rounded-full border border-white/12 bg-white/8 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-sky-100 backdrop-blur"
+            className="inline-flex rounded-full border border-line bg-white/8 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.1em] text-ink backdrop-blur"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.48, ease }}
           >
             Hey, I&apos;m Qrishun
           </motion.p>
-          <motion.h1
-            className="mt-4 text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-[2.5rem] xl:text-[3rem]"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18, duration: 0.58, ease }}
-          >
-            Graphic Designer creating visuals that make brands stand out.
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-sm leading-7 text-white/70 sm:text-base lg:text-sm xl:text-base"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.26, duration: 0.58, ease }}
-          >
-            I design posters, brand visuals, social media graphics, packaging,
-            and digital content with a bold and creative style.
-          </motion.p>
           <motion.div
-            className="mt-7 flex flex-wrap gap-3 lg:justify-end"
+            className="mt-8 flex flex-wrap gap-3 lg:justify-end"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.34, duration: 0.52, ease }}
@@ -189,7 +172,7 @@ function HeroDashboard() {
             <MagneticButton
               type="button"
               onClick={() => scrollToSection('projects')}
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-black text-slate-950 shadow-xl shadow-blue-950/30 transition hover:-translate-y-0.5 hover:bg-sky-100 hover:shadow-sky-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-canvas shadow-xl shadow-black/30 transition hover:-translate-y-0.5 hover:bg-copy hover:shadow-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
             >
               View Projects
               <FiArrowUpRight
@@ -200,7 +183,7 @@ function HeroDashboard() {
             <MagneticButton
               type="button"
               onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-5 py-3 text-sm font-black text-white shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-0.5 hover:border-sky-200/30 hover:bg-white/12 hover:shadow-sky-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/60 px-5 py-3 text-sm font-medium text-ink shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-0.5 hover:border-highlight/30 hover:bg-white/12 hover:shadow-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
             >
               Contact Me
             </MagneticButton>
@@ -223,7 +206,7 @@ function HeroDashboard() {
           }}
         >
           <div
-            className="pointer-events-none absolute bottom-10 h-20 w-72 rounded-full bg-black/45 blur-2xl"
+            className="pointer-events-none absolute bottom-10 h-20 w-72 rounded-full bg-canvas/45 blur-2xl"
             aria-hidden="true"
           />
           <motion.img
@@ -236,6 +219,20 @@ function HeroDashboard() {
             transition={{ delay: 0.15, duration: 0.78, ease }}
           />
         </motion.div>
+
+        <div
+          className="hero-readability-gradient pointer-events-none relative left-1/2 z-20 -mt-40 h-40 w-screen -translate-x-1/2 sm:-mt-48 sm:h-48"
+          aria-hidden="true"
+        />
+
+        <motion.h1
+          className="hero-title relative z-40 mx-auto -mt-12 text-center text-[clamp(2.5rem,6.5vw,6rem)] font-semibold leading-[1.1] text-ink sm:-mt-16 lg:-mt-20"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.18, duration: 0.58, ease }}
+        >
+          Graphic <span className="editorial-accent">Designer</span>
+        </motion.h1>
 
         <div className="relative z-30 mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:absolute lg:inset-x-0 lg:inset-y-10 lg:mt-0 lg:block">
           {navItems.map((item) => (

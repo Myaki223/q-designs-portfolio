@@ -51,7 +51,7 @@ function ProjectHoverPreview({ images = [], isVisible }) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="pointer-events-none absolute bottom-full left-0 z-50 mb-4 hidden w-[min(20rem,calc(100vw-3rem))] overflow-hidden rounded-lg border border-white/10 bg-black/70 p-2 shadow-2xl shadow-black/45 backdrop-blur-xl sm:block"
+          className="pointer-events-none absolute bottom-full left-0 z-50 mb-4 hidden w-[min(20rem,calc(100vw-3rem))] overflow-hidden rounded-lg border border-line bg-canvas/70 p-2 shadow-2xl shadow-black/45 backdrop-blur-xl sm:block"
           initial={
             shouldReduceMotion
               ? { opacity: 0 }
@@ -67,7 +67,7 @@ function ProjectHoverPreview({ images = [], isVisible }) {
           aria-hidden="true"
         >
           <div
-            className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(96,165,250,0.14),transparent_35%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_50%)]"
+            className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(var(--studio-rgb),0.077),transparent_35%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_50%)]"
             aria-hidden="true"
           />
           <div className="relative overflow-hidden rounded-lg">
@@ -84,7 +84,7 @@ function ProjectHoverPreview({ images = [], isVisible }) {
                   key={`${image.src}-${index}`}
                   src={image.src}
                   alt=""
-                  className="h-20 w-28 rounded-lg border border-white/10 object-cover shadow-lg shadow-black/25"
+                  className="h-20 w-28 rounded-lg border border-line object-cover shadow-lg shadow-black/25"
                   onError={() => {
                     setFailedImages((current) =>
                       current.includes(image.src)

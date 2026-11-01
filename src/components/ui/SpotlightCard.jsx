@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'motion/react'
 function SpotlightCard({
   children,
   className = '',
-  spotlightColor = 'rgba(147, 197, 253, 0.16)',
+  spotlightColor = 'rgba(var(--studio-rgb),0.088)',
 }) {
   const shouldReduceMotion = useReducedMotion()
   const [spotlight, setSpotlight] = useState({ x: '50%', y: '50%' })

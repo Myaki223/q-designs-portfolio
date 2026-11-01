@@ -28,16 +28,9 @@ function Services() {
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
         >
-          <p className="text-sm font-black uppercase text-sky-300">
+          <h2 className="text-4xl font-semibold leading-[1.3] tracking-normal text-ink sm:text-5xl lg:text-6xl">
             Design Focus
-          </p>
-          <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-            Creative Things I Design
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-white/70">
-            A graphic-focused set of creative services for brands, schools,
-            campaigns, products, and digital spaces that need stronger visuals.
-          </p>
         </motion.div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -47,8 +40,8 @@ function Services() {
               spotlightColor={service.spotlightColor}
               className={`min-h-full rounded-lg border p-6 shadow-xl backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-2xl ${
                 service.featured
-                  ? 'border-sky-300/25 bg-[linear-gradient(135deg,rgba(14,26,43,0.9),rgba(30,58,138,0.72),rgba(14,26,43,0.86))] shadow-blue-950/50 ring-1 ring-white/10'
-                  : 'border-white/10 bg-[linear-gradient(135deg,rgba(14,26,43,0.82),rgba(11,22,40,0.66),rgba(7,17,31,0.78))] shadow-black/35'
+                  ? 'border-highlight/25 surface-glass-raised shadow-black/50 ring-1 ring-white/10'
+                  : 'border-line surface-glass shadow-black/35'
               }`}
             >
               <motion.div
@@ -63,24 +56,24 @@ function Services() {
                 }}
               >
                 <div
-                  className={`flex h-12 w-12 items-center justify-center rounded-lg text-sm font-bold shadow-sm ${
+                  className={`flex h-12 w-12 items-center justify-center rounded-lg text-sm font-medium shadow-sm ${
                     service.featured
-                      ? 'bg-gradient-to-br from-blue-500/80 to-sky-500/70 text-white shadow-blue-950/40'
-                      : 'bg-white/10 text-[#CBD5E1] shadow-black/20 ring-1 ring-white/10'
+                      ? 'bg-gradient-to-br from-neutral-600/80 to-neutral-600/70 text-ink shadow-black/40'
+                      : 'bg-white/10 text-copy shadow-black/20 ring-1 ring-white/10'
                   }`}
                 >
                   <ServiceIcon type={service.icon} />
                 </div>
 
-                <h3 className="mt-6 text-xl font-black text-white">
+                <h3 className="mt-6 text-xl font-semibold text-ink">
                   {service.title}
                 </h3>
-                <p className="mt-4 text-sm leading-6 text-[#CBD5E1]">
+                <p className="mt-4 text-sm leading-7 text-copy">
                   {service.description}
                 </p>
 
                 {service.featured && (
-                  <p className="mt-6 inline-flex w-fit rotate-[-1deg] rounded-full border border-sky-300/25 bg-white/10 px-3 py-1 text-xs font-black text-sky-100 shadow-sm shadow-black/20">
+                  <p className="mt-6 inline-flex w-fit rotate-[-1deg] rounded-full border border-highlight/25 bg-white/10 px-3 py-1 text-xs font-medium text-ink shadow-sm shadow-black/20">
                     Main Focus
                   </p>
                 )}

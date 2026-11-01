@@ -17,16 +17,9 @@ function Tools() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           <div className="max-w-3xl">
-            <p className="text-sm font-black uppercase text-sky-300">
+            <h2 className="text-4xl font-semibold leading-[1.3] tracking-normal text-ink sm:text-5xl lg:text-6xl">
               Tools
-            </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-              Creative Toolbox
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/70">
-              The tools I use to turn ideas into visuals, layouts, websites,
-              and smarter workflows.
-            </p>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -36,7 +29,7 @@ function Tools() {
               return (
                 <span
                   key={note.label}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.07] px-3 py-2 text-xs font-black text-white/70 shadow-sm shadow-black/20 backdrop-blur"
+                  className="inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.07] px-3 py-2 text-xs font-medium text-copy shadow-sm shadow-black/20 backdrop-blur"
                 >
                   <Icon className="h-4 w-4" aria-hidden="true" />
                   {note.label}
@@ -48,7 +41,7 @@ function Tools() {
 
         <div className="relative mt-12">
           <div
-            className="pointer-events-none absolute inset-0 rounded-lg bg-[radial-gradient(circle_at_20%_20%,rgba(147,197,253,0.12),transparent_28%),radial-gradient(circle_at_86%_42%,rgba(59,130,246,0.14),transparent_30%)]"
+            className="pointer-events-none absolute inset-0 rounded-lg bg-[radial-gradient(circle_at_20%_20%,rgba(var(--studio-rgb),0.066),transparent_28%),radial-gradient(circle_at_86%_42%,rgba(var(--studio-rgb),0.077),transparent_30%)]"
             aria-hidden="true"
           />
           <div className="relative grid gap-5 md:grid-cols-2 lg:grid-cols-12">

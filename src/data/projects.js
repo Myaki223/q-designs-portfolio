@@ -1,56 +1,44 @@
 export const projects = [
   {
-    id: 1,
+    id: 5,
     number: '01',
     year: '2026',
-    title: 'Bid Design',
-    category: 'Bid',
-    tags: ['Layout', 'Presentation', 'Graphic Design'],
+    title: 'Branding Design',
+    category: 'Branding',
+    tags: ['Logo', 'Brand Identity', 'Visual Design'],
     description:
-      'A clean and visually organized bid design layout created for professional presentation and communication.',
+      'Brand identity visuals including logo concepts, color direction, and graphic assets for a consistent brand look.',
     // When adding more images, add them to this images array or ask Codex to rescan the folder.
     images: [
       {
-        src: '/images/projects/bid/bid-1.png',
-        alt: 'Bid design preview 1',
+        src: '/images/projects/branding/branding-1.jpg',
+        alt: 'Branding design preview 1',
         caption:
-          'Clean bid layout designed for professional presentation and easy reading.',
+          'Brand identity preview featuring logo, color direction, and visual consistency.',
       },
       {
-        src: '/images/projects/bid/bid-2.png',
-        alt: 'Bid design preview 2',
+        src: '/images/projects/branding/branding-2.png',
+        alt: 'Branding design preview 2',
         caption:
-          'Structured bid page created to keep information clear and polished.',
+          'Visual system preview showing how brand elements work together across layouts.',
       },
       {
-        src: '/images/projects/bid/bid-3.png',
-        alt: 'Bid design preview 3',
+        src: '/images/projects/branding/aersoak-presentation.png',
+        alt: 'Aersoak brand identity, product label, and bath tablet packaging presentation',
         caption:
-          'Professional bid layout with organized spacing and visual flow.',
+          'Aersoak branding, product label design, and packaging presentation.',
       },
       {
-        src: '/images/projects/bid/bid-4.png',
-        alt: 'Bid design preview 4',
+        src: '/images/projects/branding/astova-dark-presentation.png',
+        alt: 'Astova dark label branding and supplement bottle presentation',
         caption:
-          'Bid presentation page designed for confident and readable communication.',
+          'Astova brand identity and packaging design in a dark colorway.',
       },
       {
-        src: '/images/projects/bid/bid-5.png',
-        alt: 'Bid design preview 5',
+        src: '/images/projects/branding/astova-light-presentation.png',
+        alt: 'Astova light label branding and supplement bottle presentation',
         caption:
-          'Clean proposal-style layout made for a polished presentation experience.',
-      },
-      {
-        src: '/images/projects/bid/bid-6.png',
-        alt: 'Bid design preview 6',
-        caption:
-          'Organized bid design preview focused on structure, clarity, and impact.',
-      },
-      {
-        src: '/images/projects/bid/bid-7.png',
-        alt: 'Bid design preview 7',
-        caption:
-          'Final bid layout preview with a neat, professional visual treatment.',
+          'Astova brand identity and packaging design in a light colorway.',
       },
     ],
   },
@@ -250,39 +238,57 @@ export const projects = [
     ],
   },
   {
-    id: 5,
+    id: 1,
     number: '05',
     year: '2026',
-    title: 'Branding Design',
-    category: 'Branding',
-    tags: ['Logo', 'Brand Identity', 'Visual Design'],
+    title: 'Bid Design',
+    category: 'Bid',
+    tags: ['Layout', 'Presentation', 'Graphic Design'],
     description:
-      'Brand identity visuals including logo concepts, color direction, and graphic assets for a consistent brand look.',
+      'A clean and visually organized bid design layout created for professional presentation and communication.',
     // When adding more images, add them to this images array or ask Codex to rescan the folder.
     images: [
       {
-        src: '/images/projects/branding/branding-1.jpg',
-        alt: 'Branding design preview 1',
+        src: '/images/projects/bid/bid-1.png',
+        alt: 'Bid design preview 1',
         caption:
-          'Brand identity preview featuring logo, color direction, and visual consistency.',
+          'Clean bid layout designed for professional presentation and easy reading.',
       },
       {
-        src: '/images/projects/branding/branding-2.png',
-        alt: 'Branding design preview 2',
+        src: '/images/projects/bid/bid-2.png',
+        alt: 'Bid design preview 2',
         caption:
-          'Visual system preview showing how brand elements work together across layouts.',
+          'Structured bid page created to keep information clear and polished.',
       },
       {
-        src: '/images/projects/branding/branding-3.jpg',
-        alt: 'Branding design preview 3',
+        src: '/images/projects/bid/bid-3.png',
+        alt: 'Bid design preview 3',
         caption:
-          'Brand presentation design focused on personality, clarity, and consistency.',
+          'Professional bid layout with organized spacing and visual flow.',
       },
       {
-        src: '/images/projects/branding/branding-4.jpg',
-        alt: 'Branding design preview 4',
+        src: '/images/projects/bid/bid-4.png',
+        alt: 'Bid design preview 4',
         caption:
-          'Polished branding preview made to communicate a cohesive visual identity.',
+          'Bid presentation page designed for confident and readable communication.',
+      },
+      {
+        src: '/images/projects/bid/bid-5.png',
+        alt: 'Bid design preview 5',
+        caption:
+          'Clean proposal-style layout made for a polished presentation experience.',
+      },
+      {
+        src: '/images/projects/bid/bid-6.png',
+        alt: 'Bid design preview 6',
+        caption:
+          'Organized bid design preview focused on structure, clarity, and impact.',
+      },
+      {
+        src: '/images/projects/bid/bid-7.png',
+        alt: 'Bid design preview 7',
+        caption:
+          'Final bid layout preview with a neat, professional visual treatment.',
       },
     ],
   },

@@ -36,8 +36,8 @@ function SpotlightBackground({ className = '', intensity = 'default' }) {
 
   const glow =
     intensity === 'strong'
-      ? 'rgba(147, 197, 253, 0.24)'
-      : 'rgba(147, 197, 253, 0.16)'
+      ? 'rgba(var(--studio-rgb),0.132)'
+      : 'rgba(var(--studio-rgb),0.088)'
 
   return (
     <div
@@ -48,7 +48,7 @@ function SpotlightBackground({ className = '', intensity = 'default' }) {
       <div
         className="absolute inset-0 transition-opacity duration-500"
         style={{
-          background: `radial-gradient(circle at ${spotlight.x} ${spotlight.y}, ${glow} 0%, rgba(59, 130, 246, 0.16) 14%, rgba(34, 211, 238, 0.08) 30%, transparent 54%)`,
+          background: `radial-gradient(circle at ${spotlight.x} ${spotlight.y}, ${glow} 0%, rgba(var(--studio-rgb),0.088) 14%, rgba(var(--studio-rgb),0.044) 30%, transparent 54%)`,
         }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.08),transparent_42%)]" />

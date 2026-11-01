@@ -96,12 +96,12 @@ function Navbar() {
   }, [isMenuOpen])
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-[9999] border-b border-white/10 bg-[#030712]/70 shadow-lg shadow-blue-950/20 backdrop-blur-xl">
+    <header className="fixed left-0 right-0 top-0 z-[9999] border-b border-line bg-canvas/70 shadow-lg shadow-black/20 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 sm:px-6 sm:py-4">
         <button
           type="button"
           onClick={() => handleNavigation('home')}
-          className="flex items-center gap-3 rounded-lg transition hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+          className="flex items-center gap-3 rounded-lg transition hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
           aria-label="Q Designs home"
         >
           <img
@@ -117,10 +117,10 @@ function Navbar() {
               key={link.sectionId}
               type="button"
               onClick={() => handleNavigation(link.sectionId)}
-              className={`rounded-full px-3 py-2 text-sm font-bold transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
+              className={`rounded-full px-3 py-2 text-sm font-medium transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight ${
                 activeSection === link.sectionId
-                  ? 'bg-white/12 text-sky-100 shadow-lg shadow-sky-950/20'
-                  : 'text-white/70 hover:text-white'
+                  ? 'text-ink underline decoration-highlight/70 decoration-1 underline-offset-8'
+                  : 'text-copy hover:text-ink hover:underline decoration-highlight/40 decoration-1 underline-offset-8'
               }`}
               aria-current={
                 activeSection === link.sectionId ? 'page' : undefined
@@ -134,10 +134,10 @@ function Navbar() {
         <button
           type="button"
           onClick={() => handleNavigation('contact')}
-          className={`hidden rounded-full px-4 py-2 text-sm font-bold shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-sky-500/20 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:inline-flex ${
+          className={`hidden rounded-full px-4 py-2 text-sm font-medium shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-white/10 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight md:inline-flex ${
             activeSection === 'contact'
-              ? 'bg-sky-100 text-slate-950 shadow-sky-500/20'
-              : 'bg-white text-slate-950 shadow-blue-950/30 hover:bg-sky-100'
+              ? 'bg-copy text-canvas shadow-white/10'
+              : 'bg-white text-canvas shadow-black/30 hover:bg-copy'
           }`}
         >
           Let&apos;s talk
@@ -146,7 +146,7 @@ function Navbar() {
         <button
           type="button"
           onClick={() => setIsMenuOpen((current) => !current)}
-          className="relative flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.08] text-white shadow-lg shadow-black/20 backdrop-blur transition hover:border-sky-200/30 hover:bg-white/12 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:hidden"
+          className="relative flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white/[0.08] text-ink shadow-lg shadow-black/20 backdrop-blur transition hover:border-highlight/30 hover:bg-white/12 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight md:hidden"
           aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation-menu"
@@ -176,14 +176,14 @@ function Navbar() {
         {isMenuOpen && (
           <motion.div
             id="mobile-navigation-menu"
-            className="absolute left-4 right-4 top-full mt-3 overflow-hidden rounded-2xl border border-white/10 bg-[#030712]/90 p-3 shadow-2xl shadow-blue-950/40 backdrop-blur-xl md:hidden"
+            className="absolute left-4 right-4 top-full mt-3 overflow-hidden rounded-2xl border border-line bg-canvas/90 p-3 shadow-2xl shadow-black/40 backdrop-blur-xl md:hidden"
             initial={{ opacity: 0, y: -10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
             <div
-              className="pointer-events-none absolute inset-x-8 -top-10 h-20 rounded-full bg-sky-300/20 blur-3xl"
+              className="pointer-events-none absolute inset-x-8 -top-10 h-20 rounded-full bg-silver/20 blur-3xl"
               aria-hidden="true"
             />
             <div className="relative grid gap-2">
@@ -192,10 +192,10 @@ function Navbar() {
                   key={link.sectionId}
                   type="button"
                   onClick={() => handleNavigation(link.sectionId)}
-                  className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left text-sm font-black transition hover:-translate-y-0.5 hover:border-sky-200/30 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
+                  className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left text-sm font-medium transition hover:-translate-y-0.5 hover:border-highlight/30 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight ${
                     activeSection === link.sectionId
-                      ? 'border-sky-200/30 bg-sky-100/15 text-sky-100'
-                      : 'border-white/10 bg-white/[0.06] text-white/75'
+                      ? 'border-highlight/30 bg-silver/15 text-ink'
+                      : 'border-line bg-white/[0.06] text-copy'
                   }`}
                   aria-current={
                     activeSection === link.sectionId ? 'page' : undefined
@@ -209,7 +209,7 @@ function Navbar() {
               <button
                 type="button"
                 onClick={() => handleNavigation('contact')}
-                className="mt-1 rounded-xl bg-white px-4 py-3 text-sm font-black text-slate-950 shadow-lg shadow-sky-950/20 transition hover:-translate-y-0.5 hover:bg-sky-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+                className="mt-1 rounded-xl bg-white px-4 py-3 text-sm font-medium text-canvas shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-copy focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
               >
                 Let&apos;s talk
               </button>

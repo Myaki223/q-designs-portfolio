@@ -1,0 +1,19 @@
+.website-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  z-index: 2147483647;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000000;
+  overscroll-behavior: none;
+  touch-action: none;
+  user-select: none;
+}
+
+.website-loader__glass {
+  width: min(100%, 720px);
+  min-height: 0;
+  max-height: 100svh;
+}

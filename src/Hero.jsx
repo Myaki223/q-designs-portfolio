@@ -6,14 +6,14 @@ function Hero() {
   return (
     <motion.section
       id="home"
-      className="relative w-full scroll-mt-28 overflow-hidden text-white"
+      className="relative w-full scroll-mt-28 overflow-hidden text-ink"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
-      <SpotlightBackground intensity="strong" className="opacity-75" />
+      <SpotlightBackground intensity="strong" className="opacity-75 [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]" />
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-36 bg-gradient-to-b from-transparent via-[#030712]/70 to-[#030712]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-36 bg-gradient-to-b from-transparent via-black/30 to-transparent"
         aria-hidden="true"
       />
 

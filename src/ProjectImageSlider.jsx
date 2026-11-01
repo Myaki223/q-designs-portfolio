@@ -25,13 +25,13 @@ function normalizeImage(image, title) {
 function ProjectPlaceholder({ title }) {
   return (
     <div
-      className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,rgba(14,26,43,0.95),rgba(17,34,58,0.72),rgba(11,18,17,0.92))]"
+      className="flex h-full w-full items-center justify-center surface-glass"
       role="img"
       aria-label={`${title} placeholder`}
     >
-      <div className="rounded-lg border border-white/12 bg-white/10 px-5 py-4 text-center shadow-sm shadow-black/20 backdrop-blur">
-        <p className="text-sm font-black text-white">{title}</p>
-        <p className="mt-1 text-xs font-semibold text-sky-100">
+      <div className="rounded-lg border border-line bg-white/10 px-5 py-4 text-center shadow-sm shadow-black/20 backdrop-blur">
+        <p className="text-sm font-medium text-ink">{title}</p>
+        <p className="mt-1 text-xs font-medium text-ink">
           Image placeholder
         </p>
       </div>
@@ -91,7 +91,7 @@ function ProjectImageSlider({
 
   return (
     <div
-      className={`relative aspect-[16/11] w-full overflow-hidden bg-[#07111F] ${className}`}
+      className={`relative aspect-[16/11] w-full overflow-hidden bg-canvas ${className}`}
     >
       <AnimatePresence mode="wait" custom={direction}>
         {activeImage ? (
@@ -135,7 +135,7 @@ function ProjectImageSlider({
             type="button"
             onClick={showPreviousImage}
             onPointerDown={(event) => event.stopPropagation()}
-            className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/15 hover:text-sky-100"
+            className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-canvas/60 text-ink shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/15 hover:text-ink"
             aria-label={`Show previous image for ${title}`}
           >
             <FiArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -144,13 +144,13 @@ function ProjectImageSlider({
             type="button"
             onClick={showNextImage}
             onPointerDown={(event) => event.stopPropagation()}
-            className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/15 hover:text-sky-100"
+            className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-canvas/60 text-ink shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/15 hover:text-ink"
             aria-label={`Show next image for ${title}`}
           >
             <FiArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
 
-          <div className="absolute right-3 top-3 z-20 flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-3 py-1.5 shadow-lg shadow-black/20 backdrop-blur">
+          <div className="absolute right-3 top-3 z-20 flex items-center gap-2 rounded-full border border-line bg-canvas/60 px-3 py-1.5 shadow-lg shadow-black/20 backdrop-blur">
             {usableImages.map((image, index) => (
               <button
                 key={image.src}
@@ -163,13 +163,13 @@ function ProjectImageSlider({
                 }}
                 className={`h-1.5 rounded-full transition ${
                   index === normalizedActiveIndex
-                    ? 'w-5 bg-sky-300'
+                    ? 'w-5 bg-silver'
                     : 'w-1.5 bg-white/30 hover:bg-white/55'
                 }`}
                 aria-label={`Show image ${index + 1} for ${title}`}
               />
             ))}
-            <span className="ml-1 text-[11px] font-bold text-white/65">
+            <span className="ml-1 text-[11px] font-medium text-copy">
               {normalizedActiveIndex + 1}/{usableImages.length}
             </span>
           </div>
@@ -186,7 +186,7 @@ function ProjectImageSlider({
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
             transition={{ duration: 0.24, ease: 'easeOut' }}
           >
-            <p className="max-w-2xl text-xs font-semibold leading-5 text-white/85 sm:text-sm">
+            <p className="max-w-2xl text-xs font-normal leading-6 text-copy sm:text-sm">
               {activeCaption}
             </p>
           </motion.div>

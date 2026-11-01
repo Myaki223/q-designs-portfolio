@@ -21,8 +21,8 @@ function ToolCategoryCard({
   return (
     <motion.article
       layout
-      className={`group relative cursor-pointer overflow-hidden rounded-lg border bg-[linear-gradient(135deg,rgba(14,26,43,0.88),rgba(11,22,40,0.72),rgba(3,7,18,0.82))] shadow-2xl shadow-black/35 outline-none backdrop-blur-xl transition hover:bg-white/[0.08] hover:shadow-blue-950/45 focus-visible:ring-2 focus-visible:ring-sky-300/60 focus-within:bg-white/[0.08] ${
-        isOpen ? 'border-white/20' : 'border-white/10'
+      className={`group relative cursor-pointer overflow-hidden rounded-lg border surface-glass shadow-2xl shadow-black/35 outline-none backdrop-blur-xl transition hover:bg-white/[0.08] hover:shadow-black/45 focus-visible:ring-2 focus-visible:ring-highlight/60 focus-within:bg-white/[0.08] ${
+        isOpen ? 'border-white/20' : 'border-line'
       } ${isFeatured ? 'lg:col-span-7' : 'lg:col-span-5'} ${category.rotation}`}
       initial={{ opacity: 0, y: 22, rotate: 0 }}
       whileInView={{ opacity: 1, y: 0, rotate: 0 }}
@@ -64,26 +64,26 @@ function ToolCategoryCard({
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute inset-x-8 -bottom-10 h-16 rounded-full bg-sky-300/14 opacity-0 blur-2xl transition duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-x-8 -bottom-10 h-16 rounded-full bg-silver/14 opacity-0 blur-2xl transition duration-300 group-hover:opacity-100"
           aria-hidden="true"
         />
 
         <div className="relative z-10">
           <div className="flex items-start justify-between gap-5">
             <div>
-              <p className="text-xs font-black uppercase text-sky-300/85">
+              <p className="text-xs font-medium uppercase text-ink/85">
                 {category.eyebrow}
               </p>
-              <h3 className="mt-2 text-2xl font-black text-white">
+              <h3 className="mt-3 text-2xl font-semibold text-ink">
                 {category.title}
               </h3>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-[#CBD5E1]">
+              <p className="mt-4 max-w-xl text-sm leading-7 text-copy">
                 {category.summary}
               </p>
             </div>
             <span
-              className={`mt-1 shrink-0 rounded-full border border-white/10 bg-white/[0.07] px-3 py-1 text-xs font-black text-white/70 backdrop-blur transition ${
-                isOpen ? 'border-sky-300/30 text-sky-100' : ''
+              className={`mt-1 shrink-0 rounded-full border border-line bg-white/[0.07] px-3 py-1 text-xs font-medium text-copy backdrop-blur transition ${
+                isOpen ? 'border-highlight/30 text-ink' : ''
               }`}
             >
               {category.tools.length} tools

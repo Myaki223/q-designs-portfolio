@@ -8,7 +8,7 @@ function ToolSticker({ tool, compact = false, variants }) {
   return (
     <motion.li
       variants={variants}
-      className={`group flex items-center justify-center rounded-lg border border-white/10 bg-white/[0.07] shadow-lg shadow-black/20 backdrop-blur transition hover:border-sky-200/25 hover:bg-white/10 hover:shadow-xl hover:shadow-blue-500/10 ${
+      className={`group flex items-center justify-center rounded-lg border border-line bg-white/[0.07] shadow-lg shadow-black/20 backdrop-blur transition hover:border-highlight/25 hover:bg-white/10 hover:shadow-xl hover:shadow-white/10 ${
         compact ? 'p-3' : 'p-4'
       }`}
       title={tool.name}
@@ -24,9 +24,9 @@ function ToolSticker({ tool, compact = false, variants }) {
       <span
         className={`flex shrink-0 items-center justify-center rounded-lg ${
           hasLogo
-            ? 'bg-black/45'
-            : tool.iconBackground || `bg-gradient-to-br ${tool.tone} text-white`
-        } shadow-lg shadow-black/20 transition duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:drop-shadow-[0_0_16px_rgba(147,197,253,0.28)] ${
+            ? 'bg-canvas/45'
+            : tool.iconBackground || `bg-gradient-to-br ${tool.tone} text-ink`
+        } shadow-lg shadow-black/20 transition duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:drop-shadow-[0_0_16px_rgba(var(--studio-rgb),0.154)] ${
           compact ? 'h-11 w-11' : 'h-14 w-14'
         }`}
       >
@@ -34,7 +34,7 @@ function ToolSticker({ tool, compact = false, variants }) {
           <img
             src={tool.logo}
             alt=""
-            className={compact ? 'h-8 w-8' : 'h-10 w-10'}
+            className={`grayscale ${compact ? 'h-8 w-8' : 'h-10 w-10'}`}
             aria-hidden="true"
           />
         ) : (

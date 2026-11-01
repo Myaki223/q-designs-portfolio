@@ -84,7 +84,7 @@ function ProjectDetailModal({ project, onClose }) {
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-[10000] overflow-y-auto bg-slate-950/78 px-4 py-5 backdrop-blur-xl sm:px-6 sm:py-8"
+          className="fixed inset-0 z-[10000] overflow-y-auto bg-canvas/78 px-4 py-5 backdrop-blur-xl sm:px-6 sm:py-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -97,7 +97,7 @@ function ProjectDetailModal({ project, onClose }) {
           }}
         >
           <motion.div
-            className="relative mx-auto grid min-h-[min(48rem,calc(100vh-3rem))] max-w-6xl overflow-hidden rounded-lg border border-white/10 bg-[linear-gradient(135deg,rgba(14,26,43,0.94),rgba(7,17,31,0.9),rgba(3,7,18,0.96))] shadow-2xl shadow-black/60 backdrop-blur-xl lg:grid-cols-[0.95fr_1.35fr]"
+            className="relative mx-auto grid min-h-[min(48rem,calc(100vh-3rem))] max-w-6xl overflow-hidden rounded-lg border border-line surface-glass shadow-2xl shadow-black/60 backdrop-blur-xl lg:grid-cols-[0.95fr_1.35fr]"
             initial={
               shouldReduceMotion
                 ? { opacity: 0 }
@@ -116,11 +116,11 @@ function ProjectDetailModal({ project, onClose }) {
             data-lenis-prevent
           >
             <div
-              className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-sky-300/12 blur-3xl"
+              className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-silver/12 blur-3xl"
               aria-hidden="true"
             />
             <div
-              className="pointer-events-none absolute -bottom-32 left-10 h-96 w-96 rounded-full bg-blue-500/12 blur-3xl"
+              className="pointer-events-none absolute -bottom-32 left-10 h-96 w-96 rounded-full bg-silver/12 blur-3xl"
               aria-hidden="true"
             />
 
@@ -128,7 +128,7 @@ function ProjectDetailModal({ project, onClose }) {
               type="button"
               ref={closeButtonRef}
               onClick={onClose}
-              className="absolute right-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/45 text-white shadow-lg shadow-black/30 backdrop-blur transition hover:-translate-y-0.5 hover:border-sky-200/30 hover:bg-white/12 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+              className="absolute right-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-canvas/45 text-ink shadow-lg shadow-black/30 backdrop-blur transition hover:-translate-y-0.5 hover:border-highlight/30 hover:bg-white/12 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
               aria-label="Close project details"
             >
               <FiX className="h-5 w-5" aria-hidden="true" />
@@ -137,14 +137,14 @@ function ProjectDetailModal({ project, onClose }) {
             <div className="relative z-10 flex flex-col justify-between p-6 sm:p-8 lg:p-10">
               <div>
                 <div className="flex items-center gap-3">
-                  <span className="text-5xl font-black leading-none text-white/12 sm:text-6xl">
+                  <span className="text-5xl font-semibold leading-none text-muted sm:text-6xl">
                     {project.number}
                   </span>
                   <div>
-                    <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-300">
+                    <p className="text-xs font-medium uppercase tracking-[0.1em] text-ink">
                       {project.category}
                     </p>
-                    <p className="mt-1 text-xs font-bold text-white/45">
+                    <p className="mt-2 text-xs font-medium text-copy">
                       {project.year}
                     </p>
                   </div>
@@ -152,23 +152,23 @@ function ProjectDetailModal({ project, onClose }) {
 
                 <h2
                   id="project-detail-title"
-                  className="mt-7 text-4xl font-black leading-tight text-white sm:text-5xl"
+                  className="mt-7 text-4xl font-medium leading-[1.3] text-ink sm:text-5xl"
                 >
                   {project.title}
                 </h2>
-                <p className="mt-5 max-w-xl text-sm leading-7 text-[#CBD5E1] sm:text-base">
+                <p className="mt-6 max-w-xl text-sm leading-7 text-copy sm:text-base">
                   {project.description}
                 </p>
 
                 <div className="mt-6">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">
+                  <p className="text-xs font-medium uppercase tracking-[0.1em] text-copy">
                     Tools / Focus
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {tools.map((tool) => (
                       <span
                         key={tool}
-                        className="rounded-full border border-white/10 bg-white/[0.08] px-3 py-1.5 text-xs font-bold text-white/75"
+                        className="rounded-full border border-line bg-white/[0.08] px-3 py-1.5 text-xs font-medium text-copy"
                       >
                         {tool}
                       </span>
@@ -180,17 +180,17 @@ function ProjectDetailModal({ project, onClose }) {
               {activeImage?.caption && (
                 <motion.div
                   key={activeImage.src}
-                  className="mt-8 rounded-lg border border-white/10 bg-white/[0.06] p-4 shadow-lg shadow-black/20 backdrop-blur"
+                  className="mt-8 rounded-lg border border-line bg-white/[0.06] p-4 shadow-lg shadow-black/20 backdrop-blur"
                   initial={
                     shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }
                   }
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.22, ease: 'easeOut' }}
                 >
-                  <p className="text-xs font-black uppercase tracking-[0.16em] text-sky-200">
+                  <p className="text-xs font-medium uppercase tracking-[0.1em] text-ink">
                     Image caption
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-white/75">
+                  <p className="mt-3 text-sm leading-7 text-copy">
                     {activeImage.caption}
                   </p>
                 </motion.div>
@@ -198,7 +198,7 @@ function ProjectDetailModal({ project, onClose }) {
             </div>
 
             <div className="relative z-10 flex flex-col gap-4 p-4 sm:p-5 lg:p-6">
-              <div className="relative min-h-[22rem] overflow-hidden rounded-lg border border-white/10 bg-black/35 shadow-2xl shadow-black/40 sm:min-h-[30rem]">
+              <div className="relative min-h-[22rem] overflow-hidden rounded-lg border border-line bg-canvas/35 shadow-2xl shadow-black/40 sm:min-h-[30rem]">
                 {activeImage ? (
                   <AnimatePresence mode="wait">
                     <motion.img
@@ -217,7 +217,7 @@ function ProjectDetailModal({ project, onClose }) {
                     />
                   </AnimatePresence>
                 ) : (
-                  <div className="flex h-full min-h-[22rem] items-center justify-center text-white/60 sm:min-h-[30rem]">
+                  <div className="flex h-full min-h-[22rem] items-center justify-center text-muted sm:min-h-[30rem]">
                     No image available
                   </div>
                 )}
@@ -231,7 +231,7 @@ function ProjectDetailModal({ project, onClose }) {
                           current === 0 ? images.length - 1 : current - 1,
                         )
                       }
-                      className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white shadow-lg shadow-black/25 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/12 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+                      className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-canvas/55 text-ink shadow-lg shadow-black/25 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/12 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
                       aria-label={`Show previous image for ${project.title}`}
                     >
                       <FiArrowLeft className="h-5 w-5" aria-hidden="true" />
@@ -241,7 +241,7 @@ function ProjectDetailModal({ project, onClose }) {
                       onClick={() =>
                         setActiveIndex((current) => (current + 1) % images.length)
                       }
-                      className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white shadow-lg shadow-black/25 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/12 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+                      className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-canvas/55 text-ink shadow-lg shadow-black/25 backdrop-blur transition hover:-translate-y-[52%] hover:bg-white/12 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
                       aria-label={`Show next image for ${project.title}`}
                     >
                       <FiArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -257,10 +257,10 @@ function ProjectDetailModal({ project, onClose }) {
                       key={image.src}
                       type="button"
                       onClick={() => setActiveIndex(index)}
-                      className={`group overflow-hidden rounded-lg border bg-black/35 p-1 transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
+                      className={`group overflow-hidden rounded-lg border bg-canvas/35 p-1 transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight ${
                         index === activeIndex
-                          ? 'border-sky-200/50 shadow-lg shadow-sky-950/35'
-                          : 'border-white/10 hover:border-white/25'
+                          ? 'border-highlight/50 shadow-lg shadow-black/35'
+                          : 'border-line hover:border-white/25'
                       }`}
                       aria-label={`Show image ${index + 1} for ${project.title}`}
                     >
