@@ -1,6 +1,5 @@
 
 import {
-  SiCanva,
   SiClaude,
   SiCss,
   SiDjango,
@@ -19,6 +18,7 @@ import {
 import {
   FiBriefcase,
   FiCode,
+  FiPenTool,
   FiCpu,
   FiFileText,
   FiGrid,
@@ -49,7 +49,7 @@ export const toolCategories = [
       },
       {
         name: 'Canva',
-        icon: SiCanva,
+        icon: FiPenTool,
         color: 'var(--color-copy)',
         iconBackground: 'bg-canvas/65',
         iconGlow: 'drop-shadow-[0_0_14px_rgba(var(--studio-rgb),0.303)]',
