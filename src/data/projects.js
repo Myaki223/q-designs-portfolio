@@ -1,7 +1,35 @@
 export const projects = [
   {
-    id: 5,
+    id: 6,
     number: '01',
+    year: '2026',
+    title: 'StreamingMeme — LinkedIn Carousel',
+    category: 'LinkedIn Carousel',
+    tags: ['LinkedIn', 'Carousel Design', 'Social Media'],
+    description:
+      'A three-slide LinkedIn carousel for StreamingMeme, introducing its streaming technology news, daily industry brief, and buyers guide through bold typography and a consistent blue-and-white visual identity.',
+    imageAspectRatio: '1 / 1',
+    images: [
+      {
+        src: '/images/projects/streamingmeme/streamingmeme-slide-1.png',
+        alt: 'StreamingMeme LinkedIn carousel slide 1: Streaming. One step ahead.',
+        caption: 'Slide 1 — Streaming. One step ahead. Daily curated news for video professionals.',
+      },
+      {
+        src: '/images/projects/streamingmeme/streamingmeme-slide-2.png',
+        alt: 'StreamingMeme LinkedIn carousel slide 2: Big industry. One daily brief.',
+        caption: 'Slide 2 — Big industry. One daily brief. A snapshot of streaming technology coverage.',
+      },
+      {
+        src: '/images/projects/streamingmeme/streamingmeme-slide-3.png',
+        alt: 'StreamingMeme LinkedIn carousel slide 3: Your next partner. Starts here.',
+        caption: 'Slide 3 — Your next partner. Starts here. Discover the StreamingMeme buyers guide.',
+      },
+    ],
+  },
+  {
+    id: 5,
+    number: '02',
     year: '2026',
     title: 'Branding Design',
     category: 'Branding',
@@ -44,7 +72,7 @@ export const projects = [
   },
   {
     id: 2,
-    number: '02',
+    number: '03',
     year: '2026',
     title: 'Social Media Posting',
     category: 'Social Media',
@@ -99,7 +127,7 @@ export const projects = [
   },
   {
     id: 3,
-    number: '03',
+    number: '04',
     year: '2026',
     title: 'Mockup Design',
     category: 'Mockup',
@@ -160,7 +188,7 @@ export const projects = [
   },
   {
     id: 4,
-    number: '04',
+    number: '05',
     year: '2026',
     title: 'Banner Design',
     category: 'Banner',
@@ -239,7 +267,7 @@ export const projects = [
   },
   {
     id: 1,
-    number: '05',
+    number: '06',
     year: '2026',
     title: 'Bid Design',
     category: 'Bid',

@@ -119,7 +119,8 @@ function ProjectSlide({ project, direction, onNext, onPrevious, onViewProject })
             images={project.images}
             title={project.title}
             fallbackCaption={project.description}
-            className="aspect-[4/3] rounded-lg"
+            aspectRatio={project.imageAspectRatio || '4 / 3'}
+            className="rounded-lg"
           />
         </div>
       </div>

@@ -45,6 +45,7 @@ function ProjectImageSlider({
   fallbackCaption = '',
   className = '',
   imageClassName = '',
+  aspectRatio = '16 / 11',
 }) {
   const shouldReduceMotion = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState(0)
@@ -91,7 +92,8 @@ function ProjectImageSlider({
 
   return (
     <div
-      className={`relative aspect-[16/11] w-full overflow-hidden bg-canvas ${className}`}
+      style={{ aspectRatio }}
+      className={`relative w-full overflow-hidden bg-canvas ${className}`}
     >
       <AnimatePresence mode="wait" custom={direction}>
         {activeImage ? (
