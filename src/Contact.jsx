@@ -1,138 +1,135 @@
-import { useState } from 'react'
-import { motion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa'
-import { FiCheck, FiCopy, FiMail } from 'react-icons/fi'
-import MagneticButton from './components/ui/MagneticButton.jsx'
+import { FiArrowUpRight, FiCheck, FiCopy, FiMail } from 'react-icons/fi'
+import SectionHeading from './components/ui/SectionHeading.jsx'
+import { contact } from './data/site.js'
+import { useOffscreenPause } from './utils/useOffscreenPause.js'
 
-const emailAddress = 'qrishunamik55@gmail.com'
-
-const contactLinks = [
-  {
-    label: 'Email Me',
-    href: `mailto:${emailAddress}`,
-    icon: FiMail,
-    tone: 'from-line to-panel',
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/qrishun-amik-68880933a/',
-    icon: FaLinkedinIn,
-    tone: 'from-line to-panel',
-    external: true,
-  },
-  {
-    label: 'Facebook',
-    href: 'https://www.facebook.com/qrishun.amik.9/',
-    icon: FaFacebookF,
-    tone: 'from-line to-panel',
-    external: true,
-  },
+const actions = [
+  { label: 'Email Me', href: `mailto:${contact.email}`, icon: FiMail },
+  { label: 'LinkedIn', href: contact.linkedin, icon: FaLinkedinIn, external: true },
+  { label: 'Facebook', href: contact.facebook, icon: FaFacebookF, external: true },
 ]
 
-function ContactLink({ item }) {
-  const Icon = item.icon
-
-  return (
-    <MagneticButton
-      href={item.href}
-      target={item.external ? '_blank' : undefined}
-      rel={item.external ? 'noopener noreferrer' : undefined}
-      className="group flex items-center gap-3 rounded-lg border border-line bg-white/[0.07] p-4 text-copy shadow-lg shadow-black/25 backdrop-blur transition hover:-translate-y-1 hover:border-highlight/25 hover:bg-white/10 hover:text-ink hover:shadow-xl hover:shadow-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
-    >
-      <span
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${item.tone} text-ink shadow-md shadow-black/20`}
-      >
-        <Icon className="h-5 w-5" aria-hidden="true" />
-      </span>
-      <span className="font-medium">{item.label}</span>
-    </MagneticButton>
-  )
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text)
+    return true
+  } catch {
+    const field = document.createElement('textarea')
+    field.value = text
+    field.setAttribute('readonly', '')
+    field.style.position = 'fixed'
+    field.style.opacity = '0'
+    document.body.appendChild(field)
+    field.select()
+    const ok = document.execCommand('copy')
+    field.remove()
+    return ok
+  }
 }
 
+// Transmission interface: an open closing section with signal rings and
+// light trails behind a large headline and email, and four text-and-icon
+// actions in the shared `.hud-action` style.
 function Contact() {
-  const [copied, setCopied] = useState(false)
+  // null = idle, true = copied, false = the browser refused clipboard access
+  const [copied, setCopied] = useState(null)
+  const timer = useRef(null)
+  const sectionRef = useRef(null)
+  useOffscreenPause(sectionRef)
+
+  useEffect(() => () => window.clearTimeout(timer.current), [])
 
   const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(emailAddress)
-    } catch {
-      const textArea = document.createElement('textarea')
-      textArea.value = emailAddress
-      textArea.style.position = 'fixed'
-      textArea.style.opacity = '0'
-      document.body.appendChild(textArea)
-      textArea.select()
-      document.execCommand('copy')
-      document.body.removeChild(textArea)
-    }
-
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
+    const ok = await copyText(contact.email)
+    setCopied(ok)
+    window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(() => setCopied(null), ok ? 2400 : 6000)
   }
 
   return (
-    <section id="contact" className="scroll-mt-28 px-6 py-24">
-      <motion.div
-        className="mx-auto max-w-6xl overflow-hidden rounded-lg border border-line surface-glass p-6 shadow-2xl shadow-black/45 backdrop-blur-xl sm:p-8 lg:p-10"
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-      >
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
-            <p className="inline-flex rounded-full border border-highlight/25 bg-white/10 px-4 py-2 text-sm font-medium uppercase text-ink shadow-sm shadow-black/20">
-              Let&apos;s create
-            </p>
-            <h2 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.3] text-ink sm:text-5xl">
-              Got a design idea? Let&apos;s make it{' '}
-              <span className="editorial-accent">visually unforgettable.</span>
-            </h2>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-copy">
-              Send your poster, brand, packaging, social media, or digital
-              content idea to Q Designs and let&apos;s shape it into something
-              bold, clean, memorable, and ready to share.
-            </p>
-            <p className="mt-5 break-all text-sm font-medium text-muted">
-              Email: {emailAddress}
-            </p>
-          </div>
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="relative scroll-mt-28 overflow-hidden px-4 py-28 sm:px-6 lg:py-40"
+      aria-labelledby="contact-title"
+    >
+      {/* Signal rings + light trails (decorative) */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute left-1/2 top-1/2 h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.08] blur-3xl" />
+        {[0, 1.9, 3.8, 5.7].map((delay) => (
+          <span key={delay} className="tx-ring h-[44rem] w-[44rem]" style={{ '--d': `${delay}s` }} />
+        ))}
+        <span className="tx-ring h-[24rem] w-[24rem] !animate-none !opacity-40 ![transform:translate(-50%,-50%)]" />
+        {[18, 34, 66, 82].map((top, i) => (
+          <span key={top} className="tx-trail absolute inset-x-0 hidden sm:block" style={{ top: `${top}%`, '--d': `${i * -1.5}s` }} />
+        ))}
+      </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {contactLinks.map((item) => (
-              <ContactLink key={item.label} item={item} />
-            ))}
+      <div className="relative mx-auto max-w-5xl text-center">
+        <SectionHeading id="contact-title" index="05" label="Let’s create" align="center">
+          <span className="block text-[clamp(2.4rem,6vw,4.75rem)] leading-[1.05]">
+            Got a design idea? Let&apos;s make it{' '}
+            <span className="editorial-accent font-normal">visually unforgettable.</span>
+          </span>
+        </SectionHeading>
 
-            <MagneticButton
-              type="button"
-              onClick={copyEmail}
-              aria-label="Copy Qrishun Amik email address"
-              className="group relative flex items-center gap-3 rounded-lg border border-line bg-white/[0.07] p-4 text-copy shadow-lg shadow-black/25 backdrop-blur transition hover:-translate-y-1 hover:border-highlight/25 hover:bg-white/10 hover:text-ink hover:shadow-xl hover:shadow-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
-            >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-canvas to-surface text-ink shadow-md shadow-black/20">
-                {copied ? (
-                  <FiCheck className="h-5 w-5" aria-hidden="true" />
-                ) : (
-                  <FiCopy className="h-5 w-5" aria-hidden="true" />
-                )}
-              </span>
-              <span className="font-medium">
-                {copied ? 'Email copied!' : 'Copy Email'}
-              </span>
-              {copied && (
-                <span
-                  className="absolute -top-3 right-3 rounded-full border border-line bg-white px-3 py-1 text-xs font-medium text-canvas shadow-lg shadow-black/20"
-                  role="status"
-                  aria-live="polite"
-                >
-                  Email copied!
-                </span>
-              )}
-            </MagneticButton>
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-copy sm:text-lg">
+          Send your poster, brand, packaging, social media, or digital content
+          idea to Q Designs and let&apos;s shape it into something bold, clean,
+          memorable, and ready to share.
+        </p>
 
-          </div>
+        {/* Prominent email */}
+        <div className="mt-12">
+          <p className="eyebrow flex items-center justify-center gap-2 text-muted">
+            <span className="hud-pulse h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--color-cyan)]" aria-hidden="true" />
+            Open channel
+          </p>
+          <a
+            href={`mailto:${contact.email}`}
+            className="hud-action mt-3 !min-h-0 break-all pb-3 font-mono text-[clamp(1.1rem,3.6vw,2.4rem)] font-medium tracking-[0.02em] text-ink [&::after]:!bottom-0"
+          >
+            {contact.email}
+          </a>
         </div>
-      </motion.div>
+
+        {/* Actions */}
+        <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+          {actions.map(({ label, href, icon: Icon, external }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+                className="hud-action"
+              >
+                <Icon className="hud-action__icon h-4 w-4" aria-hidden="true" />
+                {label}
+                <FiArrowUpRight className="hud-action__arrow h-4 w-4" aria-hidden="true" />
+                {external && <span className="sr-only"> (opens in a new tab)</span>}
+              </a>
+            </li>
+          ))}
+          <li>
+            <button type="button" onClick={copyEmail} className="hud-action cursor-pointer">
+              {copied === true ? (
+                <FiCheck className="hud-action__icon h-4 w-4 !text-cyan" aria-hidden="true" />
+              ) : (
+                <FiCopy className="hud-action__icon h-4 w-4" aria-hidden="true" />
+              )}
+              {copied === true ? 'Email copied' : 'Copy Email'}
+            </button>
+          </li>
+        </ul>
+
+        {/* Accessible confirmation */}
+        <p role="status" aria-live="polite" className={`eyebrow mt-4 min-h-5 text-cyan transition-opacity ${copied === null ? 'opacity-0' : 'opacity-100'}`}>
+          {copied === true && 'Email copied to clipboard'}
+          {copied === false && `Couldn’t copy. The address is ${contact.email}`}
+        </p>
+      </div>
     </section>
   )
 }

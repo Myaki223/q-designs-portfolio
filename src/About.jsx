@@ -1,72 +1,70 @@
 import { motion } from 'motion/react'
+import HudCorners from './components/ui/HudCorners.jsx'
+import SectionHeading from './components/ui/SectionHeading.jsx'
+
+const tags = ['Brand Visuals', 'Posters', 'Packaging', 'Social Graphics']
 
 function About() {
   return (
-    <section id="about" className="scroll-mt-28 px-6 py-24">
+    <section id="about" className="scroll-mt-28 px-4 py-24 sm:px-6" aria-labelledby="about-title">
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+        {/* Logo, presented inside a HUD frame */}
         <motion.div
           className="relative mx-auto w-full max-w-sm"
-          initial={{ opacity: 0, y: 18, rotate: -1 }}
-          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          <div
-            className="absolute -left-4 top-10 h-24 w-20 rotate-[-10deg] rounded-lg bg-gradient-to-br from-white/18 to-muted/20 shadow-lg shadow-black/20"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute -right-4 bottom-12 h-20 w-28 rotate-[8deg] rounded-lg bg-gradient-to-br from-silver/22 to-white/14 shadow-lg shadow-black/20"
-            aria-hidden="true"
-          />
-
-          <div className="relative rounded-lg border border-line bg-canvas p-4 shadow-2xl shadow-black/40">
-            <img
-              src="/images/qf-design-logo.png"
-              alt="Q Designs logo"
-              className="aspect-square w-full rounded-lg object-contain"
-            />
-            <div className="absolute -bottom-4 left-5 rotate-[-2deg] rounded-lg border border-line bg-white px-4 py-2 text-xs font-medium text-canvas shadow-lg">
-              Q DESIGNS
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="rounded-lg border border-line surface-glass p-6 shadow-xl shadow-black/35 backdrop-blur-xl sm:p-8 lg:p-10"
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <p className="text-sm font-medium uppercase text-ink">
-            About Q Designs
-          </p>
-          <h2 className="mt-5 font-editorial text-4xl font-normal leading-[1.3] tracking-normal text-ink sm:text-5xl">
-            A creative space for bold visuals, clean layouts, and useful digital design.
-          </h2>
+          <div className="hud-panel hud-panel-grid group relative overflow-hidden p-6">
+            <HudCorners inset />
+            <div className="hud-frame-lines pointer-events-none absolute inset-0" aria-hidden="true" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(91,140,255,0.22),transparent_62%)]" aria-hidden="true" />
+            <p className="eyebrow relative flex items-center justify-between text-muted">
+              <span>ID / Q Designs</span>
+              <span className="flex items-center gap-2 text-cyan">
+                <span className="hud-pulse h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--color-cyan)]" aria-hidden="true" />
+                Active
+              </span>
+            </p>
+            <img
+              src="/images/qf-design-logo.png"
+              alt="Q Designs logo"
+              width="1080"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+              className="relative mx-auto mt-4 aspect-square w-full max-w-[18rem] object-contain drop-shadow-[0_0_24px_rgba(91,140,255,0.35)]"
+            />
+            <p className="hud-tag hud-tag--accent relative mt-4">Q Designs</p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="hud-panel relative p-6 sm:p-8 lg:p-10"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
+          <HudCorners />
+          <SectionHeading id="about-title" index="04" label="About Q Designs" size="sm">
+            A creative space for bold visuals, clean layouts, and{' '}
+            <span className="editorial-accent font-normal">useful digital design.</span>
+          </SectionHeading>
           <p className="mt-6 text-base leading-8 text-copy">
             Q Designs is my creative space for bold visuals, clean layouts, and
             digital designs that help brands stand out. I combine graphic
             design, web knowledge, and AI-assisted workflows to create visuals
             that feel fresh, useful, and memorable.
           </p>
-          <div className="mt-7 flex flex-wrap gap-2">
-            {['Brand Visuals', 'Posters', 'Packaging', 'Social Graphics'].map(
-              (item, index) => (
-                <span
-                  key={item}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium shadow-sm ${
-                    index === 0
-                      ? 'border-highlight/25 bg-silver/10 text-ink'
-                      : 'border-line bg-white/[0.08] text-copy'
-                  }`}
-                >
-                  {item}
-                </span>
-              ),
-            )}
-          </div>
+          <ul className="mt-7 flex flex-wrap gap-2">
+            {tags.map((tag, index) => (
+              <li key={tag} className={`hud-tag ${index === 0 ? 'hud-tag--accent' : ''}`}>
+                {tag}
+              </li>
+            ))}
+          </ul>
         </motion.div>
       </div>
     </section>

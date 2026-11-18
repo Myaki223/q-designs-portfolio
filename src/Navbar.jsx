@@ -1,222 +1,168 @@
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
-import { scrollToSection } from './utils/scrollToSection.js'
+import { useEffect, useRef, useState } from 'react'
+import HudCorners from './components/ui/HudCorners.jsx'
+import { getImage } from './utils/images.js'
 
 const links = [
-  { label: 'Home', sectionId: 'home' },
-  { label: 'Work', sectionId: 'projects' },
-  { label: 'Services', sectionId: 'services' },
-  { label: 'Tools', sectionId: 'tools' },
-  { label: 'About', sectionId: 'about' },
-  { label: 'Contact', sectionId: 'contact' },
+  { label: 'Work', id: 'work' },
+  { label: 'Services', id: 'services' },
+  { label: 'Tools', id: 'tools' },
+  { label: 'About', id: 'about' },
+  { label: 'Contact', id: 'contact' },
 ]
 
+const logo = getImage('site/logo')
+
+// Marks the section that crosses the upper third of the viewport.
 function useActiveSection() {
-  const [activeSection, setActiveSection] = useState('home')
+  const [active, setActive] = useState('')
 
   useEffect(() => {
-    let frameId = null
+    const sections = links
+      .map((link) => document.getElementById(link.id))
+      .filter(Boolean)
 
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 150
-      const documentHeight = document.documentElement.scrollHeight
-      const viewportBottom = window.scrollY + window.innerHeight
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        })
+      },
+      { rootMargin: '-30% 0px -65% 0px' },
+    )
 
-      if (viewportBottom >= documentHeight - 8) {
-        setActiveSection('contact')
-        return
-      }
-
-      const currentSection =
-        links.reduce((current, link) => {
-          const section = document.getElementById(link.sectionId)
-
-          if (section && section.offsetTop <= scrollPosition) {
-            return link.sectionId
-          }
-
-          return current
-        }, 'home') || 'home'
-
-      setActiveSection(currentSection)
-    }
-
-    const requestUpdate = () => {
-      if (frameId) {
-        return
-      }
-
-      frameId = window.requestAnimationFrame(() => {
-        frameId = null
-        updateActiveSection()
-      })
-    }
-
-    updateActiveSection()
-    window.addEventListener('scroll', requestUpdate, { passive: true })
-    window.addEventListener('resize', requestUpdate)
-
-    return () => {
-      if (frameId) {
-        window.cancelAnimationFrame(frameId)
-      }
-
-      window.removeEventListener('scroll', requestUpdate)
-      window.removeEventListener('resize', requestUpdate)
-    }
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
-  return [activeSection, setActiveSection]
+  return active
 }
 
 function Navbar() {
-  const [activeSection, setActiveSection] = useActiveSection()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const handleNavigation = (sectionId) => {
-    setActiveSection(sectionId)
-    setIsMenuOpen(false)
-    scrollToSection(sectionId)
-  }
+  const active = useActiveSection()
+  const [open, setOpen] = useState(false)
+  const menuButton = useRef(null)
 
   useEffect(() => {
-    if (!isMenuOpen) {
-      return undefined
-    }
+    if (!open) return undefined
 
-    const closeOnEscape = (event) => {
+    const onKeyDown = (event) => {
       if (event.key === 'Escape') {
-        setIsMenuOpen(false)
+        setOpen(false)
+        menuButton.current?.focus()
       }
     }
 
-    window.addEventListener('keydown', closeOnEscape)
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open])
 
-    return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [isMenuOpen])
+  // Mono HUD links; the active one gets a cyan marker underneath.
+  const linkClass = (id) =>
+    `relative flex items-center gap-2 rounded-sm px-3 py-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] transition-colors ${
+      active === id ? 'text-ink' : 'text-muted hover:text-ink'
+    }`
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-[9999] border-b border-line bg-canvas/70 shadow-lg shadow-black/20 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 sm:px-6 sm:py-4">
-        <button
-          type="button"
-          onClick={() => handleNavigation('home')}
-          className="flex items-center gap-3 rounded-lg transition hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
-          aria-label="Q Designs home"
+    <header className="fixed inset-x-0 top-0 z-40 bg-[#050912]/80 backdrop-blur-md">
+      <span className="hud-hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
+      <nav
+        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10"
+        aria-label="Main"
+      >
+        <a
+          href="#top"
+          className="-ml-1 flex items-center rounded-md p-1"
+          onClick={() => setOpen(false)}
+          aria-label="Q Designs — back to top"
         >
           <img
-            src="/images/qf-design-logo.png"
-            alt="Q Designs logo"
-            className="h-12 w-auto object-contain sm:h-14"
+            src={logo.src}
+            srcSet={logo.srcSet}
+            sizes="56px"
+            width="56"
+            height="56"
+            alt=""
+            className="h-12 w-12 sm:h-14 sm:w-14"
           />
-        </button>
+        </a>
 
-        <div className="hidden items-center gap-7 md:flex">
-          {links.map((link) => (
-            <button
-              key={link.sectionId}
-              type="button"
-              onClick={() => handleNavigation(link.sectionId)}
-              className={`rounded-full px-3 py-2 text-sm font-medium transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight ${
-                activeSection === link.sectionId
-                  ? 'text-ink underline decoration-highlight/70 decoration-1 underline-offset-8'
-                  : 'text-copy hover:text-ink hover:underline decoration-highlight/40 decoration-1 underline-offset-8'
-              }`}
-              aria-current={
-                activeSection === link.sectionId ? 'page' : undefined
-              }
-            >
-              {link.label}
-            </button>
+        <ul className="hidden items-center gap-1 md:flex">
+          {links.map((link, index) => (
+            <li key={link.id}>
+              <a
+                href={`#${link.id}`}
+                className={linkClass(link.id)}
+                aria-current={active === link.id ? 'true' : undefined}
+              >
+                <span className={active === link.id ? 'text-cyan' : 'text-accent-soft/50'}>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {link.label}
+                <span
+                  aria-hidden="true"
+                  className={`absolute inset-x-3 -bottom-px h-px bg-cyan shadow-[0_0_8px_var(--color-cyan)] transition-opacity ${
+                    active === link.id ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
 
         <button
+          ref={menuButton}
           type="button"
-          onClick={() => handleNavigation('contact')}
-          className={`hidden rounded-full px-4 py-2 text-sm font-medium shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-white/10 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight md:inline-flex ${
-            activeSection === 'contact'
-              ? 'bg-copy text-canvas shadow-white/10'
-              : 'bg-white text-canvas shadow-black/30 hover:bg-copy'
-          }`}
+          className="hud-icon-btn md:!hidden"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((value) => !value)}
         >
-          Let&apos;s talk
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setIsMenuOpen((current) => !current)}
-          className="relative flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white/[0.08] text-ink shadow-lg shadow-black/20 backdrop-blur transition hover:border-highlight/30 hover:bg-white/12 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight md:hidden"
-          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-navigation-menu"
-        >
-          <span className="sr-only">
-            {isMenuOpen ? 'Close menu' : 'Open menu'}
+          <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
+          <span aria-hidden="true" className="relative block h-3 w-5">
+            <span
+              className={`absolute left-0 h-0.5 w-5 bg-current transition-transform ${
+                open ? 'top-1.5 rotate-45' : 'top-0'
+              }`}
+            />
+            <span
+              className={`absolute left-0 h-0.5 w-5 bg-current transition-transform ${
+                open ? 'top-1.5 -rotate-45' : 'top-3'
+              }`}
+            />
           </span>
-          <span
-            className={`absolute h-0.5 w-5 rounded-full bg-current transition duration-300 ${
-              isMenuOpen ? 'translate-y-0 rotate-45' : '-translate-y-1.5'
-            }`}
-          />
-          <span
-            className={`absolute h-0.5 w-5 rounded-full bg-current transition duration-300 ${
-              isMenuOpen ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          <span
-            className={`absolute h-0.5 w-5 rounded-full bg-current transition duration-300 ${
-              isMenuOpen ? 'translate-y-0 -rotate-45' : 'translate-y-1.5'
-            }`}
-          />
         </button>
       </nav>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            id="mobile-navigation-menu"
-            className="absolute left-4 right-4 top-full mt-3 overflow-hidden rounded-2xl border border-line bg-canvas/90 p-3 shadow-2xl shadow-black/40 backdrop-blur-xl md:hidden"
-            initial={{ opacity: 0, y: -10, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div
-              className="pointer-events-none absolute inset-x-8 -top-10 h-20 rounded-full bg-silver/20 blur-3xl"
-              aria-hidden="true"
-            />
-            <div className="relative grid gap-2">
-              {links.map((link) => (
-                <button
-                  key={link.sectionId}
-                  type="button"
-                  onClick={() => handleNavigation(link.sectionId)}
-                  className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left text-sm font-medium transition hover:-translate-y-0.5 hover:border-highlight/30 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight ${
-                    activeSection === link.sectionId
-                      ? 'border-highlight/30 bg-silver/15 text-ink'
-                      : 'border-line bg-white/[0.06] text-copy'
-                  }`}
-                  aria-current={
-                    activeSection === link.sectionId ? 'page' : undefined
-                  }
-                >
-                  {link.label}
-                  <span className="h-1.5 w-1.5 rounded-full bg-current opacity-60" />
-                </button>
+      {open && (
+        <div id="mobile-menu" className="fade-in px-4 pb-4 pt-2 sm:px-6 md:hidden">
+          <div className="hud-panel hud-panel-grid mx-auto max-w-7xl overflow-hidden">
+            <HudCorners />
+            <p className="eyebrow border-b border-[var(--hud-line)] px-4 py-3 text-muted">Navigation</p>
+            <ul className="px-2 py-1">
+              {links.map((link, index) => (
+                <li key={link.id}>
+                  <a
+                    href={`#${link.id}`}
+                    onClick={() => setOpen(false)}
+                    aria-current={active === link.id ? 'true' : undefined}
+                    className={`flex min-h-12 items-center gap-4 rounded-sm border-b border-[var(--hud-line)] px-2 font-mono text-sm uppercase tracking-[0.14em] transition-colors last:border-0 hover:text-cyan ${
+                      active === link.id ? 'text-ink' : 'text-copy'
+                    }`}
+                  >
+                    <span className={active === link.id ? 'text-cyan' : 'text-accent-soft/60'}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    {link.label}
+                    {active === link.id && (
+                      <span aria-hidden="true" className="ml-auto h-1.5 w-1.5 bg-cyan shadow-[0_0_8px_var(--color-cyan)]" />
+                    )}
+                  </a>
+                </li>
               ))}
-
-              <button
-                type="button"
-                onClick={() => handleNavigation('contact')}
-                className="mt-1 rounded-xl bg-white px-4 py-3 text-sm font-medium text-canvas shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-copy focus:outline-none focus-visible:ring-2 focus-visible:ring-highlight"
-              >
-                Let&apos;s talk
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </ul>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

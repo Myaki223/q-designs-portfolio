@@ -14,9 +14,7 @@ function ToolIcon({ tool, duplicate = false }) {
       role={duplicate ? undefined : 'img'}
       aria-label={duplicate ? undefined : tool.name}
       title={tool.name}
-      className={`group/logo flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line ${
-        tool.iconBackground || 'bg-white/[0.06]'
-      } text-muted shadow-lg shadow-black/20 backdrop-blur transition duration-300 hover:-translate-y-1 hover:scale-110 hover:border-highlight/35 hover:bg-white/10 hover:text-ink hover:shadow-black/40 sm:h-14 sm:w-14`}
+      className="group/logo flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-[var(--hud-line)] bg-[#0b1530]/70 text-accent-soft/80 transition duration-300 hover:-translate-y-1 hover:border-cyan hover:text-cyan hover:shadow-[0_0_18px_rgba(125,227,255,0.25)] sm:h-14 sm:w-14"
     >
       {tool.logo ? (
         <img
@@ -30,7 +28,6 @@ function ToolIcon({ tool, duplicate = false }) {
           className={`h-5 w-5 transition duration-300 group-hover/logo:drop-shadow-[0_0_12px_rgba(var(--studio-rgb),0.231)] sm:h-6 sm:w-6 ${
             tool.iconGlow || ''
           }`}
-          style={tool.color ? { color: tool.color } : undefined}
           aria-hidden="true"
         />
       )}
@@ -58,7 +55,7 @@ function ToolLogoSet({ duplicate = false }) {
 function ToolLogoMarquee() {
   return (
     <div
-      className="tool-logo-marquee mt-12 overflow-hidden rounded-lg border border-line bg-canvas/30 py-4 shadow-xl shadow-black/30 backdrop-blur-xl"
+      className="tool-logo-marquee hud-panel mt-12 overflow-hidden py-4"
       style={{
         maskImage:
           'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)',

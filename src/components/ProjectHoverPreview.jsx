@@ -1,97 +1,45 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { getImage } from '../utils/images.js'
 
-function normalizeImage(image) {
-  if (typeof image === 'string') {
-    return { src: image }
-  }
+// Scrolling strip of a project's images, shown above "View case study" on
+// hover or focus. Uses the smallest derivative of each image, and only
+// mounts (and so only downloads) while visible.
+function ProjectHoverPreview({ project, isVisible }) {
+  const reduceMotion = useReducedMotion()
 
-  if (!image?.src) {
-    return null
-  }
-
-  return image
-}
-
-function buildPreviewImages(images) {
-  const cleanImages = images.map(normalizeImage).filter(Boolean)
-
-  if (cleanImages.length === 0) {
-    return []
-  }
-
-  return Array.from({ length: Math.max(6, cleanImages.length) }, (_, index) => {
-    return cleanImages[index % cleanImages.length]
-  })
-}
-
-function ProjectHoverPreview({ images = [], isVisible }) {
-  const shouldReduceMotion = useReducedMotion()
-  const [failedImages, setFailedImages] = useState([])
-
-  const previewImages = useMemo(() => {
-    return buildPreviewImages(
-      images.filter((image) => {
-        const normalizedImage = normalizeImage(image)
-        return normalizedImage && !failedImages.includes(normalizedImage.src)
-      }),
-    )
-  }, [failedImages, images])
-
-  const marqueeImages = useMemo(
-    () => [...previewImages, ...previewImages],
-    [previewImages],
-  )
-
-  if (previewImages.length === 0) {
-    return null
-  }
+  const images = useMemo(() => {
+    const keys = [...new Set(project.sections.flatMap((s) => s.items.map((i) => i.image)))]
+    const unique = keys.slice(0, 8).map((key) => getImage(key).smallest)
+    const filled = Array.from({ length: Math.max(6, unique.length) }, (_, i) => unique[i % unique.length])
+    return [...filled, ...filled]
+  }, [project])
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="pointer-events-none absolute bottom-full left-0 z-50 mb-4 hidden w-[min(20rem,calc(100vw-3rem))] overflow-hidden rounded-lg border border-line bg-canvas/70 p-2 shadow-2xl shadow-black/45 backdrop-blur-xl sm:block"
-          initial={
-            shouldReduceMotion
-              ? { opacity: 0 }
-              : { opacity: 0, y: 10, scale: 0.96 }
-          }
+          className="hud-panel pointer-events-none absolute bottom-full left-1/2 z-30 mb-3 hidden w-[min(20rem,calc(100vw-3rem))] -translate-x-1/2 overflow-hidden p-2 sm:block"
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={
-            shouldReduceMotion
-              ? { opacity: 0 }
-              : { opacity: 0, y: 8, scale: 0.96 }
-          }
+          exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.96 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           aria-hidden="true"
         >
-          <div
-            className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(var(--studio-rgb),0.077),transparent_35%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_50%)]"
-            aria-hidden="true"
-          />
-          <div className="relative overflow-hidden rounded-lg">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-black/80 to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-black/80 to-transparent" />
-
-            <div
-              className={`flex w-max gap-2 ${
-                shouldReduceMotion ? '' : 'animate-project-hover-marquee'
-              }`}
-            >
-              {marqueeImages.map((image, index) => (
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(var(--studio-rgb),0.077),transparent_35%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_50%)]" />
+          <div className="relative overflow-hidden rounded-md">
+            <div className="absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-black/80 to-transparent" />
+            <div className="absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-black/80 to-transparent" />
+            <div className={`flex w-max gap-2 ${reduceMotion ? '' : 'animate-project-hover-marquee'}`}>
+              {images.map((src, index) => (
                 <img
-                  key={`${image.src}-${index}`}
-                  src={image.src}
+                  key={`${src}-${index}`}
+                  src={src}
                   alt=""
-                  className="h-20 w-28 rounded-lg border border-line object-cover shadow-lg shadow-black/25"
-                  onError={() => {
-                    setFailedImages((current) =>
-                      current.includes(image.src)
-                        ? current
-                        : [...current, image.src],
-                    )
-                  }}
+                  width="112"
+                  height="80"
+                  decoding="async"
+                  className="h-20 w-28 rounded-sm border border-[var(--hud-line)] object-cover"
                 />
               ))}
             </div>

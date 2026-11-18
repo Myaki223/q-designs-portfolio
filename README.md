@@ -1,55 +1,68 @@
 # Q Designs Portfolio
 
-A creative graphic design portfolio website for Qrishun Amik, built with React, Vite, Tailwind CSS, Motion for React, and interactive UI components.
+Portfolio website for Qrishun Amik, a graphic designer in Zamboanga City, built
+with React, Vite, and Tailwind CSS.
 
 ## Overview
 
-Q Designs Portfolio is a cinematic, monochrome portfolio focused on graphic design work, selected project showcases, and creative tools. It highlights real design categories such as bid layouts, social media posting, mockups, banners, and branding.
+A single-page portfolio organized by brand and organization. Each project opens
+as a full-screen case study at a shareable URL (`#work/<slug>`), with the
+artwork first, followed by an overview, design notes, deliverables, and
+curated gallery sections.
+
+Projects, in order: Aersoak, StreamingMeme, Astova, Pilar College of Zamboanga
+City, Bellows Labs, Driven Motorworks, JCI Zamboanga.
 
 ## Features
 
-- Monochrome Q Designs interface with full-color project artwork
-- Creative hero section with portrait and floating navigation cards
-- Selected Works sliding carousel
-- Multiple images per project
-- Project detail modal with larger previews and captions
-- Hover image preview marquee
-- Logo-only tool marquee
-- Interactive Creative Toolbox
-- Lenis smooth scrolling
-- Active navbar highlight while scrolling
-- Copy Email interaction
-- Responsive design
+- Selected Works coverflow carousel: 3D side cards, autoplay (paused on hover,
+  focus, open case study, and reduced motion), swipe, arrow keys, and dots;
+  projects grouped by type (packaging, digital, institutional, apparel, boards)
+- Case-study dialog: artwork-first layout, focus trap, Escape to close, focus
+  return, background scroll lock, Back button support, next-project link
+- Lightbox for uncropped, full-size viewing with arrow-key navigation
+- Responsive WebP derivatives with `srcset`, explicit dimensions, and lazy loading
+- No blocking intro: the hero renders as soon as the page loads
+- HUD hero (`src/Hero.jsx`, `src/components/HeroHud.jsx`,
+  `src/components/HeroBackdrop.jsx`): holographic perspective floor, circuit
+  pathways with travelling light, full-width and in-frame scans, segmented and
+  counter-rotating rings, illuminated nodes, interface labels (wide screens
+  only), chamfered HUD buttons, a short "Initializing → Online" sequence after
+  the logo intro, and four-layer mouse parallax. Simplified on phones; all
+  ambient motion switches off under reduced motion.
+- Studio effects from the original design: animated gradient background,
+  cursor-following spotlight, portrait that leans toward the pointer, magnetic
+  buttons, spotlight service cards, lifting project cards with an image-strip
+  hover preview, reveal-on-scroll, and Lenis smooth scrolling (paused while a
+  case study is open)
+- Copy Email with a fallback and a live status message
+- Respects `prefers-reduced-motion`
 
-## Tech Stack
+## Editing content
 
-- React
-- Vite
-- Tailwind CSS
-- Motion for React
-- Lenis
-- React Icons
-- React Bits-inspired SpotlightCard component
+- Projects and their copy: `src/data/projects.js`. Copy describes only what the
+  artwork shows; optional `role`, `brief`, `audience`, `year`, and
+  `organization` fields render when filled in.
+- Services, tools, and contact details: `src/data/site.js`
+- Images: see `scripts/optimize-images/README.md`. Originals stay untouched in
+  `public/images/projects/`; the site loads `public/images/optimized/`.
 
 ## Project Structure
 
 ```text
 q-designs-portfolio/
 ├── public/
-│   ├── icons/
 │   └── images/
+│       ├── projects/      originals (not loaded by the site)
+│       └── optimized/     WebP derivatives
+├── scripts/optimize-images/
 ├── src/
-│   ├── components/
-│   ├── data/
+│   ├── components/        ProjectDialog, Lightbox, ResponsiveImage
+│   ├── data/              projects, site copy, image manifest
 │   ├── utils/
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── styles.css
-├── index.html
-├── package.json
-├── pnpm-lock.yaml
-├── README.md
-└── vite.config.js
+│   ├── App.jsx            hash routing for case studies
+│   └── styles.css         theme tokens
+└── index.html
 ```
 
 ## How to Run Locally
@@ -65,32 +78,50 @@ npm run dev
 npm run build
 ```
 
-## Website intro
+## HUD design system
 
-The interface palette lives in the Tailwind v4 `@theme` block in `src/styles.css`.
-Use `canvas`, `panel`, `surface`, `ink`, `copy`, `muted`, `line`, and `highlight`
-color utilities for new UI. The `surface-glass` utilities and RGB lighting tokens
-keep translucent surfaces and moving studio lights neutral. Grayscale filters
-apply only to software logos; the portrait and project imagery retain their original colors.
+Every section uses the same futuristic interface language. Reuse these
+instead of writing one-off styles:
 
-The full-screen intro uses ReactDrops' Liquid Glass Logo from
-https://reactdrops.dev/r/liquid-glass-logo.json and the existing
-`public/images/qf-design-logo.png` asset in its original colors. It runs on every
-page load with `ending="logo"`, then holds for 500 ms and fades for 600 ms.
-Its configurable tile is neutral charcoal. The original shader's chromatic
-refraction is intentionally retained rather than desaturating the WebGL canvas.
+- **Tokens** (`src/styles.css`): `--color-accent` (#5B8CFF), `--color-accent-soft`,
+  `--color-cyan`, `--color-navy`, `--font-mono` (IBM Plex Mono), plus
+  `--hud-line`, `--hud-line-strong`, `--hud-glow`, `--hud-panel-bg`, `--hud-ease`.
+- **CSS components** (in `@layer components`, so Tailwind utilities still win):
+  `.hud-panel` (+ `--interactive`, `--active`), `.hud-panel-grid`, `.art-frame`,
+  `.hud-tag` (+ `--accent`), `.hud-icon-btn` (+ `--primary`), `.hud-btn`
+  (chamfered buttons), `.hud-hairline`, `.hud-link`, and the `eyebrow` utility.
+  Hover, focus-visible, active, and disabled (`disabled` / `aria-disabled`)
+  states are built in.
+- **React helpers** (`src/components/ui`): `HudCorners` (corner brackets; use
+  `inset` inside `overflow-hidden`), `HudButton` (link or button), and
+  `SectionHeading` (mono "01 / Label" line + title).
+- **Background**: `CreativeBackground` is the fixed site-wide environment
+  (navy atmosphere, drifting light, holographic grid, vignette); sections stay
+  transparent over it.
 
-`src/components/WebsiteLoader.jsx` handles page readiness, scroll locking,
-interaction blocking, and a failure-only timeout. The renderer's shaders,
-physics, timing, and fitting are unchanged. The only integration additions to
-the installed component are an optional `onComplete` callback after the final
-composite frame and fallback-image load/error callbacks. Keep these hooks when
-updating the registry files. The upstream license is retained in
-`src/components/ReactDrops-LICENSE.txt`.
+## Theme
 
-Run `pnpm test` with Node.js 24+ for completion, pause/replay, reduced-motion,
-failed-image, unavailable-WebGL, and disposal checks. Use `pnpm build` for the
-production bundle. Check the real WebGL visuals in the browser on refresh.
+The palette lives in the Tailwind v4 `@theme` block in `src/styles.css`
+(`canvas`, `panel`, `surface`, `raised`, `ink`, `copy`, `muted`, `line`,
+`line-strong`). Type is Geist with Newsreader italic accents.
+
+## Entrance intro
+
+`src/components/HudIntro.jsx` (styles: "Entrance intro" in `src/styles.css`)
+plays a ~4.9s HUD power-on: rings assemble, a scan and light pulse pass
+through, "QRISHUN AMIK" decodes, "CREATIVE SYSTEM ONLINE" appears, and the HUD
+expands into the site while the hero's own entrance plays.
+
+- Plays once per browser-tab session (`sessionStorage` key `qd-intro-played`);
+  refreshes and in-page navigation in the same tab skip it.
+- Never plays under `prefers-reduced-motion`.
+- "Skip intro" button and Escape reveal the site immediately; a 6.5s failsafe
+  always dismisses the overlay.
+- The page underneath is `inert` while the intro runs, and loads normally.
+
+The earlier Liquid Glass loader (`src/components/WebsiteLoader.jsx` and the
+ReactDrops files) is kept but no longer mounted; its tests still run with
+`npm test` (Node.js 24+).
 
 ## Vercel Deployment Settings
 

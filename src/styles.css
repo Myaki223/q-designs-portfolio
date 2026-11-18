@@ -3,47 +3,85 @@
 @theme {
   --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-editorial: "Newsreader", Georgia, "Times New Roman", serif;
-  --color-canvas: #000000;
-  --color-panel: #0a0a0a;
-  --color-surface: #141414;
-  --color-ink: #ffffff;
-  --color-copy: #d4d4d4;
-  --color-muted: #888888;
-  --color-line: #292929;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --color-canvas: #0b0b0b;
+  --color-panel: #111111;
+  --color-surface: #171717;
+  --color-raised: #1f1f1f;
+  --color-ink: #f4f4f2;
+  --color-copy: #c9c9c5;
+  --color-muted: #96968f;
+  --color-line: #2a2a28;
+  --color-line-strong: #3a3a37;
   --color-highlight: #ffffff;
   --color-silver: #b8b8b8;
+  /* Blue accent: a soft electric blue for lights and details, and a lighter
+     tint for text so it stays readable on the dark background. */
+  --color-accent: #5b8cff;
+  --color-accent-soft: #9bb8ff;
+  /* Icy cyan for small illuminated nodes, and deep navy for the HUD lighting. */
+  --color-cyan: #7de3ff;
+  --color-navy: #0b1530;
 }
 
 :root {
   color-scheme: dark;
-  --studio-rgb: 255, 255, 255;
-  --silver-rgb: 184, 184, 184;
+  /* Studio-light tokens used by the background, spotlight, and glass effects.
+     Tinted blue so every glow carries a touch of the accent. */
+  --studio-rgb: 91, 140, 255;
   --surface-rgb: 20, 20, 20;
   --panel-rgb: 10, 10, 10;
-  --canvas-rgb: 0, 0, 0;
   --glass-gradient: linear-gradient(135deg, rgba(var(--surface-rgb), 0.94), rgba(var(--surface-rgb), 0.78), rgba(var(--panel-rgb), 0.94));
   --glass-raised-gradient: linear-gradient(135deg, rgba(var(--surface-rgb), 0.94), rgba(41, 41, 41, 0.78), rgba(var(--surface-rgb), 0.94));
   font-family: var(--font-sans);
   font-optical-sizing: auto;
-  font-weight: 400;
   font-synthesis: none;
-  letter-spacing: 0.01em;
-  word-spacing: 0.025em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 @layer base {
+  html {
+    background: var(--color-canvas);
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    scrollbar-color: rgba(255, 255, 255, 0.24) var(--color-canvas);
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+
   h1, h2, h3 {
-    letter-spacing: 0;
-    word-spacing: 0.04em;
-    line-height: 1.3;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   button, input, textarea, select {
     font-family: inherit;
   }
 
-  p {
-    line-height: 1.75;
+  :focus-visible {
+    outline: 2px solid var(--color-accent-soft);
+    outline-offset: 3px;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Sections receive focus after in-page navigation; no outline for that. */
+  section[tabindex="-1"]:focus {
+    outline: none;
   }
 }
 
@@ -51,47 +89,23 @@
   font-family: var(--font-editorial);
   font-weight: 400;
   font-style: italic;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
+  color: var(--color-accent-soft);
 }
 
-.hero-title {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 6px 18px rgba(0, 0, 0, 0.5);
+/* Small interface label used site-wide (mono, tracked, uppercase). */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-soft);
 }
 
-.hero-readability-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 -4rem;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.25) 25%,
-    rgba(0, 0, 0, 0.7) 48%,
-    rgba(0, 0, 0, 0.88) 64%,
-    rgba(0, 0, 0, 0.5) 80%,
-    transparent 100%
-  );
-}
 
-@utility surface-glass {
-  background-image: var(--glass-gradient);
-}
 
-@utility surface-glass-raised {
-  background-image: var(--glass-raised-gradient);
-}
-
-::selection {
-  color: var(--color-canvas);
-  background: var(--color-copy);
-}
-
-html {
-  scroll-behavior: smooth;
-  scrollbar-gutter: stable;
-  scrollbar-color: rgba(255, 255, 255, 0.28) #000000;
-}
-
+/* Smooth scrolling (Lenis). Scroll areas marked data-lenis-prevent keep native scrolling. */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -105,75 +119,13 @@ html.lenis body {
   overflow: clip;
 }
 
-.lenis [data-lenis-prevent],
-.lenis [data-lenis-prevent-wheel],
-.lenis [data-lenis-prevent-touch],
-.lenis [data-lenis-prevent-vertical],
-.lenis [data-lenis-prevent-horizontal] {
+.lenis [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
 
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-@keyframes soft-background-pan {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-soft-background-pan {
-  animation: soft-background-pan 18s ease-in-out infinite;
-}
-
-@keyframes atmosphere-drift {
-  0% {
-    transform: translate3d(-2%, -1%, 0) scale(1);
-    opacity: 0.72;
-  }
-
-  50% {
-    transform: translate3d(3%, 2%, 0) scale(1.08);
-    opacity: 0.92;
-  }
-
-  100% {
-    transform: translate3d(-2%, -1%, 0) scale(1);
-    opacity: 0.72;
-  }
-}
-
-.animate-atmosphere-drift {
-  animation: atmosphere-drift 24s ease-in-out infinite;
-}
-
 @keyframes tool-logo-marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 .animate-tool-logo-marquee {
@@ -185,17 +137,729 @@ body {
 }
 
 @keyframes project-hover-marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 .animate-project-hover-marquee {
   animation: project-hover-marquee 13s linear infinite;
+}
+
+/* Animated studio background. */
+@keyframes soft-background-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-soft-background-pan {
+  animation: soft-background-pan 18s ease-in-out infinite;
+}
+
+@keyframes atmosphere-drift {
+  0%, 100% { transform: translate3d(-2%, -1%, 0) scale(1); opacity: 0.72; }
+  50% { transform: translate3d(3%, 2%, 0) scale(1.08); opacity: 0.92; }
+}
+
+.animate-atmosphere-drift {
+  animation: atmosphere-drift 24s ease-in-out infinite;
+}
+
+::selection {
+  color: #ffffff;
+  background: var(--color-accent);
+}
+
+/* Background artwork frame: neutral so the work carries the color. */
+/* ===========================================================================
+   HUD design system — shared by every section.
+   Panels, frames, corner brackets, tags, icon buttons, and hairlines, with
+   consistent hover / focus / active / disabled states. Pair with the React
+   helpers in src/components/ui (HudCorners, HudButton, SectionHeading).
+=========================================================================== */
+
+:root {
+  --hud-line: rgba(155, 184, 255, 0.14);
+  --hud-line-strong: rgba(155, 184, 255, 0.38);
+  --hud-glow: 0 0 0 1px rgba(91, 140, 255, 0.18), 0 0 32px rgba(91, 140, 255, 0.16);
+  --hud-panel-bg: linear-gradient(160deg, rgba(14, 24, 54, 0.72) 0%, rgba(6, 10, 22, 0.86) 100%);
+  --hud-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer components {
+/* Artwork frame: navy plate with a fine border. Artwork keeps its colors. */
+.art-frame {
+  position: relative;
+  background: #070c1a;
+  border: 1px solid var(--hud-line);
+  transition: border-color 300ms var(--hud-ease), box-shadow 300ms var(--hud-ease);
+}
+
+.art-frame:hover,
+.art-frame:focus-visible {
+  border-color: var(--hud-line-strong);
+  box-shadow: var(--hud-glow);
+}
+
+/* Panel: the base surface for cards and content blocks. */
+.hud-panel {
+  position: relative;
+  border: 1px solid var(--hud-line);
+  border-radius: 6px;
+  background: var(--hud-panel-bg);
+  box-shadow:
+    inset 0 1px 0 rgba(155, 184, 255, 0.07),
+    0 24px 60px rgba(0, 0, 0, 0.45);
+  transition: border-color 300ms var(--hud-ease), box-shadow 300ms var(--hud-ease);
+}
+
+.hud-panel--interactive:hover,
+.hud-panel--interactive:focus-within,
+.hud-panel--interactive:focus-visible {
+  border-color: var(--hud-line-strong);
+  box-shadow:
+    inset 0 1px 0 rgba(155, 184, 255, 0.1),
+    var(--hud-glow),
+    0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.hud-panel--active {
+  border-color: rgba(91, 140, 255, 0.6);
+  box-shadow: var(--hud-glow), 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Faint technical grid inside a panel or section. */
+.hud-panel-grid {
+  background-image:
+    linear-gradient(rgba(91, 140, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 140, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Corner brackets (rendered by <HudCorners />). */
+.hud-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 0 solid var(--hud-corner, rgba(155, 184, 255, 0.55));
+  pointer-events: none;
+  transition: border-color 300ms var(--hud-ease), width 300ms var(--hud-ease), height 300ms var(--hud-ease);
+}
+
+.hud-corner--tl { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.hud-corner--tr { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
+.hud-corner--bl { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
+.hud-corner--br { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.hud-corner--inset.hud-corner--tl { top: 4px; left: 4px; }
+.hud-corner--inset.hud-corner--tr { top: 4px; right: 4px; }
+.hud-corner--inset.hud-corner--bl { bottom: 4px; left: 4px; }
+.hud-corner--inset.hud-corner--br { bottom: 4px; right: 4px; }
+
+.group:hover .hud-corner,
+.group:focus-within .hud-corner,
+.hud-panel--active .hud-corner {
+  --hud-corner: var(--color-cyan);
+  width: 18px;
+  height: 18px;
+}
+
+/* Mono tag / chip */
+.hud-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(155, 184, 255, 0.24);
+  border-radius: 2px;
+  background: rgba(11, 21, 48, 0.6);
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-copy);
+}
+
+.hud-tag--accent {
+  border-color: rgba(91, 140, 255, 0.55);
+  color: var(--color-accent-soft);
+}
+
+/* Square icon button (arrows, close, menu). */
+.hud-icon-btn {
+  display: inline-flex;
+  min-width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--hud-line-strong);
+  border-radius: 4px;
+  background: rgba(11, 21, 48, 0.75);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: border-color 250ms var(--hud-ease), box-shadow 250ms var(--hud-ease), background-color 250ms var(--hud-ease), color 250ms var(--hud-ease);
+}
+
+.hud-icon-btn:hover,
+.hud-icon-btn:focus-visible {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 0 1px rgba(125, 227, 255, 0.25), 0 0 18px rgba(125, 227, 255, 0.25);
+  color: #ffffff;
+}
+
+.hud-icon-btn:active {
+  background: rgba(91, 140, 255, 0.25);
+}
+
+.hud-icon-btn--primary {
+  border-color: var(--color-accent-soft);
+  background: var(--color-accent);
+  color: var(--color-canvas);
+}
+
+.hud-icon-btn--primary:hover,
+.hud-icon-btn--primary:focus-visible {
+  color: var(--color-canvas);
+  background: var(--color-accent-soft);
+}
+
+.hud-icon-btn:disabled,
+.hud-icon-btn[aria-disabled="true"],
+.hud-btn[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* Hairline divider that fades at both ends. */
+.hud-hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(155, 184, 255, 0.35), transparent);
+}
+
+/* Text link in the HUD style */
+.hud-link {
+  color: var(--color-copy);
+  text-decoration: underline;
+  text-decoration-color: rgba(155, 184, 255, 0.35);
+  text-underline-offset: 4px;
+  transition: color 200ms ease, text-decoration-color 200ms ease;
+}
+
+.hud-link:hover,
+.hud-link:focus-visible {
+  color: var(--color-cyan);
+  text-decoration-color: var(--color-cyan);
+}
+}
+
+
+/* Custom cursor (src/components/CustomCursor.jsx). The system cursor is
+   hidden only while the custom one is active. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.custom-cursor[data-visible] {
+  opacity: 1;
+}
+
+.custom-cursor__dot,
+.custom-cursor__ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.custom-cursor__dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--color-accent-soft);
+  box-shadow: 0 0 12px rgba(91, 140, 255, 0.9);
+  transition: opacity 200ms ease;
+}
+
+.custom-cursor__ring-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  border: 1.5px solid rgba(155, 184, 255, 0.55);
+  border-radius: 9999px;
+  background: transparent;
+  transition:
+    width 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 300ms ease,
+    border-color 300ms ease,
+    scale 150ms ease;
+}
+
+.custom-cursor__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+/* Over links and buttons: the ring grows and takes a soft blue fill. */
+.custom-cursor[data-state="hover"] .custom-cursor__ring-shape {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(155, 184, 255, 0.85);
+  background: rgba(91, 140, 255, 0.14);
+}
+
+/* Over elements with data-cursor: a solid blue bubble with a word inside. */
+.custom-cursor[data-state="label"] .custom-cursor__ring-shape {
+  width: 78px;
+  height: 78px;
+  border-color: transparent;
+  background: rgba(91, 140, 255, 0.92);
+  box-shadow: 0 10px 30px rgba(91, 140, 255, 0.35);
+}
+
+.custom-cursor[data-state="label"] .custom-cursor__label {
+  opacity: 1;
+}
+
+.custom-cursor[data-state="label"] .custom-cursor__dot {
+  opacity: 0;
+}
+
+.custom-cursor[data-pressed] .custom-cursor__ring-shape {
+  scale: 0.85;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero HUD (src/Hero.jsx, src/components/HeroHud.jsx)
+   Entrance order: grid → HUD lines → portrait → headline → actions.
+   Everything stays paused while the logo intro covers the page, and the
+   global reduced-motion rule turns every step into an instant end state.
+--------------------------------------------------------------------------- */
+
+/* Fine technical grid, strongest around the portrait and fading out. */
+.hud-grid {
+  background-image:
+    linear-gradient(rgba(91, 140, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 140, 255, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 42%, black 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 42%, black 0%, transparent 72%);
+}
+
+/* Deep-navy lighting behind the portrait. */
+.hud-light {
+  background:
+    radial-gradient(ellipse 34% 40% at 50% 40%, rgba(37, 66, 150, 0.42), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 50% 35%, rgba(16, 30, 70, 0.55), transparent 75%);
+}
+
+/* The portrait frame: a navy disc lit from the upper left. */
+.hud-frame {
+  background: radial-gradient(circle at 40% 28%, rgba(91, 140, 255, 0.26), rgba(18, 32, 74, 0.7) 48%, rgba(6, 10, 24, 0.9) 74%);
+  box-shadow:
+    inset 0 0 0 1px rgba(155, 184, 255, 0.12),
+    0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Entrance steps */
+.hud-in-fade { animation: hud-fade 1s ease both; }
+.hud-in-lines { animation: hud-fade 0.6s ease 0.25s both; }
+.hud-in-portrait { animation: hud-portrait 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both; }
+.hud-in-text { animation: hud-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--hud-delay, 0.7s) both; }
+
+/* SVG strokes drawn in (paths use pathLength="1"). */
+.hud-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hud-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) var(--hud-delay, 0.35s) forwards;
+}
+
+/* One slow decorative rotation (a full turn every 2 minutes). */
+.hud-spin {
+  transform-box: view-box;
+  transform-origin: 300px 300px;
+  animation: hud-spin 120s linear infinite;
+}
+
+/* Gentle status pulse */
+.hud-pulse { animation: hud-pulse 2.8s ease-in-out infinite; }
+
+.hud-node-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hud-node 2.8s ease-out infinite;
+}
+
+/* Occasional scan, confined to the portrait frame: one pass every 11s. */
+.hud-scan {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(125, 227, 255, 0.05) 45%,
+    rgba(125, 227, 255, 0.22) 50%,
+    rgba(125, 227, 255, 0.05) 55%,
+    transparent 100%
+  );
+  transform: translateY(-110%);
+  animation: hud-scan 11s ease-in-out 2.4s infinite;
+}
+
+/* Hold the whole sequence while the logo intro is up. */
+#portfolio-content[inert] :is(.hud-in-fade, .hud-in-lines, .hud-in-portrait, .hud-in-text, .hud-draw, .hud-scan) {
+  animation-play-state: paused;
+}
+
+@keyframes hud-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hud-draw { to { stroke-dashoffset: 0; } }
+@keyframes hud-spin { to { transform: rotate(360deg); } }
+@keyframes hud-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes hud-node {
+  0% { opacity: 0.8; transform: scale(1); }
+  70%, 100% { opacity: 0; transform: scale(2.6); }
+}
+@keyframes hud-portrait {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hud-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hud-scan {
+  0% { transform: translateY(-110%); opacity: 0; }
+  2% { opacity: 1; }
+  16% { transform: translateY(110%); opacity: 1; }
+  18%, 100% { transform: translateY(110%); opacity: 0; }
+}
+
+/* Counter-rotating ring (opposite direction, a turn every 90s). */
+.hud-spin-reverse {
+  transform-box: view-box;
+  transform-origin: 300px 300px;
+  animation: hud-spin 90s linear infinite reverse;
+}
+
+/* A short light pulse travelling along a circuit pathway (pathLength=1). */
+.circuit-pulse {
+  stroke-dasharray: 0.06 0.94;
+  stroke-dashoffset: 0.06;
+  opacity: 0;
+  filter: drop-shadow(0 0 4px rgba(125, 227, 255, 0.9));
+  animation: circuit-pulse 12s ease-in-out infinite;
+}
+
+@keyframes circuit-pulse {
+  0% { stroke-dashoffset: 0.06; opacity: 0; }
+  4% { opacity: 1; }
+  32% { stroke-dashoffset: -0.94; opacity: 1; }
+  34%, 100% { stroke-dashoffset: -0.94; opacity: 0; }
+}
+
+/* Holographic floor: a perspective grid drifting slowly toward the viewer. */
+.hud-floor {
+  perspective: 520px;
+  perspective-origin: 50% 0%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 35%, black 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 35%, black 70%, transparent 100%);
+}
+
+.hud-floor__plane {
+  position: absolute;
+  inset: 0 -50%;
+  transform: rotateX(68deg);
+  transform-origin: 50% 0%;
+  background-image:
+    linear-gradient(rgba(91, 140, 255, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 140, 255, 0.22) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: hud-floor-drift 6s linear infinite;
+}
+
+@keyframes hud-floor-drift {
+  to { background-position: 0 64px; }
+}
+
+/* Full-width scan line that sweeps the hero once every 14s. */
+.hud-sweep {
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, rgba(91, 140, 255, 0.06) 70%, rgba(125, 227, 255, 0.35) 99%, transparent);
+  transform: translateY(-160px);
+  animation: hud-sweep 14s cubic-bezier(0.45, 0, 0.25, 1) 0.4s infinite;
+}
+
+@keyframes hud-sweep {
+  0% { transform: translateY(-160px); opacity: 0; }
+  2% { opacity: 1; }
+  20% { transform: translateY(105vh); opacity: 1; }
+  21%, 100% { transform: translateY(105vh); opacity: 0; }
+}
+
+/* Faint holographic scanlines inside the portrait frame. */
+.hud-frame-lines {
+  background: repeating-linear-gradient(to bottom, rgba(155, 184, 255, 0.07) 0 1px, transparent 1px 4px);
+  -webkit-mask-image: radial-gradient(circle, black 40%, transparent 72%);
+  mask-image: radial-gradient(circle, black 40%, transparent 72%);
+}
+
+/* Rim light behind the portrait's shoulders. */
+.hud-rim {
+  background: radial-gradient(ellipse 50% 38% at 50% 62%, rgba(91, 140, 255, 0.45), transparent 70%);
+  filter: blur(18px);
+}
+
+/* Initialization bar under the eyebrow. */
+.hud-boot-bar {
+  transform-origin: left;
+  animation: hud-boot 1.3s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+}
+
+@keyframes hud-boot {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Blinking ellipsis while the system initializes. */
+.hud-blink { animation: hud-pulse 0.9s steps(2, jump-none) infinite; }
+
+/* Headline: crisp shadow plus a restrained blue glow. */
+.hud-title {
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 28px rgba(91, 140, 255, 0.35);
+}
+
+/* HUD corner brackets around the headline block. */
+.hud-brackets::before,
+.hud-brackets::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: rgba(155, 184, 255, 0.55);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.hud-brackets::before {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.hud-brackets::after {
+  right: 0;
+  bottom: 0;
+  border-width: 0 1px 1px 0;
+}
+
+/* HUD buttons: chamfered panels. The <a> stays unclipped so the keyboard
+   focus outline is visible; the edge and fill are clipped spans inside. */
+.hud-btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  --chamfer: 11px;
+  --edge: rgba(155, 184, 255, 0.45);
+  --fill: rgba(11, 21, 48, 0.82);
+  display: inline-flex;
+  border-radius: 2px;
+  color: var(--color-ink);
+}
+
+.hud-btn--primary {
+  --edge: var(--color-accent-soft);
+  --fill: var(--color-accent);
+  color: var(--color-canvas);
+}
+
+.hud-btn__edge {
+  display: inline-flex;
+  padding: 1px;
+  background: var(--edge);
+  clip-path: polygon(var(--chamfer) 0, 100% 0, 100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%, 0 100%, 0 var(--chamfer));
+  transition: background 300ms ease, filter 300ms ease;
+}
+
+.hud-btn__fill {
+  position: relative;
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.6rem;
+  overflow: hidden;
+  padding: 0 1.6rem;
+  background: var(--fill);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  clip-path: polygon(calc(var(--chamfer) - 0.5px) 0, 100% 0, 100% calc(100% - var(--chamfer) + 0.5px), calc(100% - var(--chamfer) + 0.5px) 100%, 0 100%, 0 calc(var(--chamfer) - 0.5px));
+}
+
+/* Light sweep across the button on hover / focus. */
+.hud-btn__fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hud-btn:hover .hud-btn__edge,
+.hud-btn:focus-visible .hud-btn__edge {
+  background: var(--color-cyan);
+  filter: drop-shadow(0 0 10px rgba(125, 227, 255, 0.55));
+}
+
+.hud-btn:hover .hud-btn__fill::after,
+.hud-btn:focus-visible .hud-btn__fill::after {
+  transform: translateX(120%);
+}
+
+/* Scroll cue: a short line that slides down. */
+.hud-cue-line {
+  animation: hud-cue 2.4s ease-in-out infinite;
+}
+
+@keyframes hud-cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+#portfolio-content[inert] :is(.circuit-pulse, .hud-sweep, .hud-boot-bar) {
+  animation-play-state: paused;
+}
+
+
+/* Phones: keep the frame, primary arcs, and nodes; drop secondary detail
+   and the moving extras. */
+@media (max-width: 639px) {
+  .hud-secondary,
+  .hud-scan {
+    display: none;
+  }
+
+  .hud-spin,
+  .hud-floor__plane {
+    animation: none;
+  }
+
+  .hud-sweep,
+  .hud-brackets::before,
+  .hud-brackets::after {
+    display: none;
+  }
+}
+
+/* Reduced motion: everything holds still — no rotation, pulses, drift, or scans. */
+@media (prefers-reduced-motion: reduce) {
+  .hud-spin,
+  .hud-spin-reverse,
+  .hud-pulse,
+  .hud-node-ring,
+  .hud-floor__plane,
+  .hud-blink,
+  .hud-cue-line {
+    animation: none !important;
+  }
+
+  .hud-scan,
+  .hud-sweep,
+  .circuit-pulse {
+    display: none;
+  }
+}
+
+/* The portrait cut-out runs to the edges of its file, so the arms end in a
+   hard vertical line. Fade the sides and the base so it melts into the
+   background (both masks intersect). */
+.hero-portrait-mask {
+  -webkit-mask-image:
+    linear-gradient(to bottom, black 62%, transparent 96%),
+    linear-gradient(to right, transparent 0%, black 16%, black 84%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, black 62%, transparent 96%),
+    linear-gradient(to right, transparent 0%, black 16%, black 84%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* Darkens the portrait's base behind the title, then fades back out, so
+   there is no hard edge against the animated background below. */
+.hero-fade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 22%,
+    rgba(0, 0, 0, 0.75) 45%,
+    rgba(0, 0, 0, 0.75) 58%,
+    rgba(0, 0, 0, 0.3) 80%,
+    transparent 100%
+  );
+}
+
+.hero-title {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Motion that only runs when the visitor allows it. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Coverflow slide between positions. */
+  .coverflow-card {
+    transition:
+      transform 750ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 750ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 500ms ease;
+  }
+
+
+
+  .fade-in {
+    animation: fade-in 220ms ease-out both;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -208,21 +872,518 @@ body {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===========================================================================
+   Entrance intro (src/components/HudIntro.jsx) — about 4.9s.
+   0–1.7s HUD assembles · 1.0–2.4s scan · 1.5–3.3s light pulse · 1.7–2.9s
+   name decodes · 3.1s "Creative System Online" · 3.9–4.9s HUD expands and
+   dissolves into the site.
+=========================================================================== */
+.hud-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #0b1530 0%, #04060d 62%);
+  transition: opacity 1000ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hud-intro[data-phase="exit"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hud-intro__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(91, 140, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 140, 255, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 60%);
+  mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 60%);
+  animation: hud-fade 1.4s ease both;
+}
+
+.hud-intro__stage {
+  position: relative;
+  width: min(26rem, 78vw);
+  aspect-ratio: 1;
+  transition:
+    transform 1000ms cubic-bezier(0.65, 0, 0.35, 1),
+    filter 1000ms ease,
+    opacity 900ms ease;
+  will-change: transform, opacity;
+}
+
+/* Exit: the HUD expands toward the viewer and dissolves into the site. */
+.hud-intro[data-phase="exit"] .hud-intro__stage {
+  transform: scale(1.7);
+  filter: blur(4px);
+  opacity: 0;
+}
+
+.hud-intro__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hud-intro__ring {
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+}
+
+.hud-intro__ring--outer {
+  animation:
+    intro-assemble 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both,
+    hud-spin 40s linear 1.7s infinite;
+}
+
+.hud-intro__ring--ticks {
+  animation:
+    intro-assemble-reverse 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both,
+    hud-spin 60s linear 1.95s infinite reverse;
+}
+
+.hud-intro__draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hud-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.6s forwards;
+}
+
+.hud-intro__draw--late { animation-delay: 0.95s; }
+
+.hud-intro__core { animation: hud-fade 1s ease 0.8s both; }
+
+.hud-intro__scan {
+  transform: translateY(-60px);
+  animation: intro-scan 1.4s cubic-bezier(0.45, 0, 0.25, 1) 1s both;
+}
+
+/* Soft light pulse from the center */
+.hud-intro__pulse {
+  position: absolute;
+  inset: 22%;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(91, 140, 255, 0.55) 0%, rgba(125, 227, 255, 0.12) 45%, transparent 70%);
+  opacity: 0;
+  animation: intro-pulse 1.8s cubic-bezier(0.33, 1, 0.68, 1) 1.5s both;
+}
+
+.hud-intro__text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.hud-intro__name {
+  font-family: var(--font-mono);
+  font-size: clamp(1.05rem, 3.6vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 0.6em;
+  margin-right: -0.6em;
+  color: #ffffff;
+  text-shadow: 0 0 18px rgba(91, 140, 255, 0.7);
+  opacity: 0;
+  filter: blur(3px);
+  transition:
+    opacity 700ms ease,
+    filter 900ms ease,
+    letter-spacing 1400ms cubic-bezier(0.16, 1, 0.3, 1),
+    margin-right 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-intro:not([data-phase="assemble"]) .hud-intro__name {
+  opacity: 1;
+  filter: none;
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+}
+
+.hud-intro__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.8vw, 0.72rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 700ms ease, transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-intro[data-phase="online"] .hud-intro__status,
+.hud-intro[data-phase="exit"] .hud-intro__status {
+  opacity: 1;
+  transform: none;
+}
+
+.hud-intro__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 10px var(--color-cyan);
+  animation: hud-pulse 1s ease-in-out infinite;
+}
+
+/* Skip control: always visible, bottom right. */
+.hud-intro__skip {
+  position: absolute;
+  right: clamp(1rem, 4vw, 2rem);
+  bottom: clamp(1rem, 4vw, 2rem);
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid rgba(155, 184, 255, 0.45);
+  border-radius: 4px;
+  background: rgba(11, 21, 48, 0.8);
+  padding: 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.hud-intro__skip:hover,
+.hud-intro__skip:focus-visible {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 0 1px rgba(125, 227, 255, 0.3), 0 0 18px rgba(125, 227, 255, 0.3);
+  outline: none;
+}
+
+.hud-intro__key {
+  border: 1px solid rgba(155, 184, 255, 0.3);
+  border-radius: 2px;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.6rem;
+  color: var(--color-muted);
+}
+
+@keyframes intro-assemble {
+  from { opacity: 0; transform: scale(0.82) rotate(-50deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes intro-assemble-reverse {
+  from { opacity: 0; transform: scale(1.15) rotate(35deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes intro-scan {
+  0% { transform: translateY(-60px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(400px); opacity: 0; }
+}
+
+@keyframes intro-pulse {
+  0% { opacity: 0; transform: scale(0.55); }
+  40% { opacity: 0.9; }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+
+/* Phones: smaller HUD, no tick ring, skip button stays reachable. */
+@media (max-width: 639px) {
+  .hud-intro__ring--ticks {
+    display: none;
+  }
+}
+
+/* ===========================================================================
+   Design Focus — service list + holographic display (src/Services.jsx,
+   src/components/ServiceVisual.jsx)
+=========================================================================== */
+.svc-indicator {
+  position: absolute;
+  left: -0.9rem;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  transform: translateY(-50%);
+  background: var(--color-cyan);
+  box-shadow: 0 0 10px var(--color-cyan);
+  transition: height 400ms var(--hud-ease);
+}
+
+.svc-item.is-active .svc-indicator { height: 62%; }
+
+/* One-off scan across the title when a service activates. */
+.svc-scan {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.svc-scan::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(125, 227, 255, 0.22), transparent);
+  transform: translateX(-110%);
+  animation: svc-scan 700ms var(--hud-ease) forwards;
+}
+
+@keyframes svc-scan {
+  to { transform: translateX(380%); }
+}
+
+/* Description reveal (grid row 0fr to 1fr), no jumps elsewhere. */
+.svc-desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 450ms var(--hud-ease), opacity 350ms ease;
+}
+
+.svc-desc.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* Display scene animations. --d is each element's delay. */
+.sv-scene { width: 100%; height: 100%; }
+
+.sv-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  fill: var(--color-muted);
+}
+
+.sv-mark { font-family: var(--font-sans); font-size: 46px; font-weight: 600; fill: var(--color-ink); }
+.sv-type { font-family: var(--font-editorial); font-style: italic; font-size: 24px; fill: var(--color-ink); }
+
+.sv-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hud-draw 1s var(--hud-ease) var(--d, 0s) forwards;
+}
+
+.sv-draw-dash,
+.sv-grow,
+.sv-pop,
+.sv-fly-l,
+.sv-fly-r,
+.sv-rise {
+  transform-box: fill-box;
+}
+
+.sv-draw-dash { transform-origin: top; animation: sv-grow-y 0.8s var(--hud-ease) var(--d, 0s) both; }
+.sv-fade { animation: hud-fade 0.6s ease var(--d, 0s) both; }
+.sv-pop { transform-origin: center; animation: sv-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0s) both; }
+.sv-fly-l { animation: sv-fly-l 0.9s var(--hud-ease) var(--d, 0s) both; }
+.sv-fly-r { animation: sv-fly-r 0.9s var(--hud-ease) var(--d, 0s) both; }
+.sv-rise { animation: sv-rise 0.8s var(--hud-ease) var(--d, 0s) both; }
+.sv-grow { transform-origin: left center; animation: sv-grow 0.7s var(--hud-ease) var(--d, 0s) both; }
+.sv-cycle { animation: sv-cycle 6s ease-in-out 1.2s infinite; }
+.sv-net { animation: sv-net-out 0.6s ease 2.2s forwards; transform-box: fill-box; transform-origin: center; }
+.sv-box { opacity: 0; animation: sv-box-in 0.9s var(--hud-ease) 2.4s forwards; transform-box: fill-box; transform-origin: center; }
+.sv-scene--mockup { animation: sv-tilt 7s ease-in-out infinite; }
+
+@keyframes sv-grow-y { from { opacity: 0; transform: scaleY(0); } to { opacity: 1; transform: none; } }
+@keyframes sv-pop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+@keyframes sv-fly-l { from { opacity: 0; transform: translateX(-90px); } to { opacity: 1; transform: none; } }
+@keyframes sv-fly-r { from { opacity: 0; transform: translateX(90px); } to { opacity: 1; transform: none; } }
+@keyframes sv-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes sv-grow { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: none; } }
+@keyframes sv-cycle {
+  0%, 22% { transform: translateX(0); }
+  33%, 55% { transform: translateX(106px); }
+  66%, 88% { transform: translateX(201px); }
+  100% { transform: translateX(0); }
+}
+@keyframes sv-net-out { to { opacity: 0; transform: scale(0.9); } }
+@keyframes sv-box-in { from { opacity: 0; transform: translateY(24px) scale(0.8); } to { opacity: 1; transform: none; } }
+@keyframes sv-tilt {
+  0%, 100% { transform: perspective(800px) rotateY(-14deg); }
+  50% { transform: perspective(800px) rotateY(14deg); }
+}
+
+/* ===========================================================================
+   Tools — connected creative network (src/Tools.jsx)
+=========================================================================== */
+.net-line {
+  stroke: rgba(155, 184, 255, 0.16);
+  stroke-width: 1;
+  transition: stroke 400ms ease, opacity 400ms ease;
+}
+
+.net-line.is-active {
+  stroke: var(--color-cyan);
+  filter: drop-shadow(0 0 3px rgba(125, 227, 255, 0.8));
+}
+
+/* Light travelling along the active connections */
+.net-flow {
+  stroke: var(--color-cyan);
+  stroke-width: 1.5;
+  stroke-dasharray: 0.06 0.94;
+  stroke-dashoffset: 1;
+  animation: net-flow 2.6s linear infinite;
+}
+
+@keyframes net-flow { to { stroke-dashoffset: 0; } }
+
+/* Restrained float on decorative nodes only (labels and targets stay put). */
+.net-float { animation: net-float 5s ease-in-out infinite; }
+
+@keyframes net-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.net-tool {
+  transition: opacity 400ms ease;
+}
+
+.net-tool.is-dim { opacity: 0.42; }
+
+.net-tool__tile {
+  transition: border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease, color 300ms ease;
+}
+
+.net-tool.is-lit .net-tool__tile {
+  border-color: rgba(125, 227, 255, 0.55);
+  color: var(--color-ink);
+}
+
+.net-tool[aria-pressed="true"] .net-tool__tile,
+.net-tool:hover .net-tool__tile,
+.net-tool:focus-visible .net-tool__tile {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 0 1px rgba(125, 227, 255, 0.3), 0 0 22px rgba(125, 227, 255, 0.35);
+  color: var(--color-cyan);
+}
+
+/* ===========================================================================
+   Contact — transmission interface (src/Contact.jsx)
+=========================================================================== */
+.tx-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(91, 140, 255, 0.35);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  animation: tx-ring 7.5s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) infinite;
+}
+
+@keyframes tx-ring {
+  0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+  12% { opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0; }
+}
+
+/* Light trails: thin lines with a slow travelling highlight. */
+.tx-trail {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(125, 227, 255, 0) 30%, rgba(125, 227, 255, 0.75) 50%, rgba(125, 227, 255, 0) 70%, transparent 100%);
+  background-size: 220% 100%;
+  animation: tx-trail 6s linear var(--d, 0s) infinite;
+  opacity: 0.6;
+}
+
+@keyframes tx-trail {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+/* ===========================================================================
+   Shared action link: text + icon, underline draws in, arrow shifts, and a
+   brief borderless light sweep. Used by Contact; reusable elsewhere.
+=========================================================================== */
+.hud-action {
+  position: relative;
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.6rem;
+  overflow: hidden;
+  font-weight: 500;
+  color: var(--color-copy);
+  transition: color 250ms ease;
+}
+
+.hud-action::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.45rem;
+  height: 1px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 8px var(--color-cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 450ms var(--hud-ease);
+}
+
+.hud-action::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(125, 227, 255, 0.18) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.hud-action__icon { color: var(--color-accent-soft); transition: color 250ms ease; }
+.hud-action__arrow { color: var(--color-accent-soft); transition: transform 300ms var(--hud-ease), color 250ms ease; }
+
+.hud-action:hover,
+.hud-action:focus-visible { color: var(--color-ink); }
+.hud-action:hover::after,
+.hud-action:focus-visible::after { transform: scaleX(1); }
+.hud-action:hover::before,
+.hud-action:focus-visible::before { transform: translateX(120%); transition: transform 700ms var(--hud-ease); }
+.hud-action:hover .hud-action__icon,
+.hud-action:focus-visible .hud-action__icon { color: var(--color-cyan); }
+.hud-action:hover .hud-action__arrow,
+.hud-action:focus-visible .hud-action__arrow { transform: translate(3px, -3px); color: var(--color-cyan); }
+
+/* Pause continuous effects in sections that are off screen
+   (data-offscreen is set by src/utils/useOffscreenPause.js). */
+[data-offscreen] *,
+[data-offscreen] *::before,
+[data-offscreen] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Reduced motion: hold the ambient loops still. */
+@media (prefers-reduced-motion: reduce) {
+  .sv-cycle,
+  .sv-scene--mockup,
+  .net-flow,
+  .net-float,
+  .tx-ring,
+  .tx-trail {
+    animation: none !important;
   }
 
-  .animate-tool-logo-marquee {
-    animation: none !important;
-    transform: none !important;
-  }
-
-  .animate-project-hover-marquee {
-    animation: none !important;
-    transform: none !important;
-  }
-
-  .animate-atmosphere-drift {
-    animation: none !important;
-  }
+  .tx-ring { opacity: 0.35; transform: translate(-50%, -50%) scale(0.8); }
 }

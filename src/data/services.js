@@ -4,8 +4,7 @@ export const creativeServices = [
     description:
       'Logo concepts, brand graphics, visual direction, and polished design assets that make a project feel recognizable.',
     icon: 'brand',
-    spotlightColor: 'rgba(var(--studio-rgb),0.132)',
-    featured: true,
+    spotlightColor: 'rgba(var(--studio-rgb),0.099)',
   },
   {
     title: 'Social Media Graphics',

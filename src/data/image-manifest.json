@@ -1,0 +1,754 @@
+{
+ "aersoak/range": {
+  "width": 3146,
+  "height": 817,
+  "files": [
+   [
+    800,
+    "/images/optimized/aersoak/range-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/aersoak/range-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/aersoak/range-2400.webp"
+   ]
+  ]
+ },
+ "aersoak/label": {
+  "width": 3146,
+  "height": 818,
+  "files": [
+   [
+    800,
+    "/images/optimized/aersoak/label-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/aersoak/label-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/aersoak/label-2400.webp"
+   ]
+  ]
+ },
+ "astova/dark-range": {
+  "width": 2291,
+  "height": 815,
+  "files": [
+   [
+    800,
+    "/images/optimized/astova/dark-range-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/astova/dark-range-1600.webp"
+   ],
+   [
+    2291,
+    "/images/optimized/astova/dark-range-2291.webp"
+   ]
+  ]
+ },
+ "astova/light-range": {
+  "width": 2291,
+  "height": 815,
+  "files": [
+   [
+    800,
+    "/images/optimized/astova/light-range-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/astova/light-range-1600.webp"
+   ],
+   [
+    2291,
+    "/images/optimized/astova/light-range-2291.webp"
+   ]
+  ]
+ },
+ "astova/dark-front": {
+  "width": 700,
+  "height": 800,
+  "files": [
+   [
+    480,
+    "/images/optimized/astova/dark-front-480.webp"
+   ],
+   [
+    700,
+    "/images/optimized/astova/dark-front-700.webp"
+   ]
+  ]
+ },
+ "astova/light-front": {
+  "width": 700,
+  "height": 800,
+  "files": [
+   [
+    480,
+    "/images/optimized/astova/light-front-480.webp"
+   ],
+   [
+    700,
+    "/images/optimized/astova/light-front-700.webp"
+   ]
+  ]
+ },
+ "astova/dark-facts": {
+  "width": 800,
+  "height": 665,
+  "files": [
+   [
+    480,
+    "/images/optimized/astova/dark-facts-480.webp"
+   ],
+   [
+    800,
+    "/images/optimized/astova/dark-facts-800.webp"
+   ]
+  ]
+ },
+ "bellows/range": {
+  "width": 3508,
+  "height": 1096,
+  "files": [
+   [
+    800,
+    "/images/optimized/bellows/range-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/bellows/range-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/bellows/range-2400.webp"
+   ]
+  ]
+ },
+ "bellows/label": {
+  "width": 3508,
+  "height": 1352,
+  "files": [
+   [
+    800,
+    "/images/optimized/bellows/label-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/bellows/label-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/bellows/label-2400.webp"
+   ]
+  ]
+ },
+ "streamingmeme/slide-1": {
+  "width": 4500,
+  "height": 4500,
+  "files": [
+   [
+    640,
+    "/images/optimized/streamingmeme/slide-1-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/streamingmeme/slide-1-1080.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/streamingmeme/slide-1-1600.webp"
+   ]
+  ]
+ },
+ "streamingmeme/slide-2": {
+  "width": 4500,
+  "height": 4500,
+  "files": [
+   [
+    640,
+    "/images/optimized/streamingmeme/slide-2-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/streamingmeme/slide-2-1080.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/streamingmeme/slide-2-1600.webp"
+   ]
+  ]
+ },
+ "streamingmeme/slide-3": {
+  "width": 4500,
+  "height": 4500,
+  "files": [
+   [
+    640,
+    "/images/optimized/streamingmeme/slide-3-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/streamingmeme/slide-3-1080.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/streamingmeme/slide-3-1600.webp"
+   ]
+  ]
+ },
+ "pilar/banner-1": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-1-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-1-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-1-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-2": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-2-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-2-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-2-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-3": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-3-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-3-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-3-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-4": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-4-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-4-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-4-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-5": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-5-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-5-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-5-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-6": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-6-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-6-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-6-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-7": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-7-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-7-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-7-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-8": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-8-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-8-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-8-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-9": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-9-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-9-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-9-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-10": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-10-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-10-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-10-1920.webp"
+   ]
+  ]
+ },
+ "pilar/banner-11": {
+  "width": 1920,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/banner-11-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/pilar/banner-11-1200.webp"
+   ],
+   [
+    1920,
+    "/images/optimized/pilar/banner-11-1920.webp"
+   ]
+  ]
+ },
+ "pilar/social-1": {
+  "width": 1080,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/social-1-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/pilar/social-1-1080.webp"
+   ]
+  ]
+ },
+ "pilar/social-2": {
+  "width": 2048,
+  "height": 1365,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/social-2-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/pilar/social-2-1080.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/pilar/social-2-1600.webp"
+   ]
+  ]
+ },
+ "pilar/social-3": {
+  "width": 1080,
+  "height": 1280,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/social-3-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/pilar/social-3-1080.webp"
+   ]
+  ]
+ },
+ "pilar/social-4": {
+  "width": 1080,
+  "height": 1280,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/social-4-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/pilar/social-4-1080.webp"
+   ]
+  ]
+ },
+ "pilar/social-5": {
+  "width": 1080,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/social-5-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/pilar/social-5-1080.webp"
+   ]
+  ]
+ },
+ "pilar/social-6": {
+  "width": 1080,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/social-6-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/pilar/social-6-1080.webp"
+   ]
+  ]
+ },
+ "pilar/social-7": {
+  "width": 1080,
+  "height": 1080,
+  "files": [
+   [
+    640,
+    "/images/optimized/pilar/social-7-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/pilar/social-7-1080.webp"
+   ]
+  ]
+ },
+ "pilar/polo": {
+  "width": 3000,
+  "height": 2000,
+  "files": [
+   [
+    800,
+    "/images/optimized/pilar/polo-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/pilar/polo-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/pilar/polo-2400.webp"
+   ]
+  ]
+ },
+ "pilar/jersey-navy": {
+  "width": 7746,
+  "height": 4904,
+  "files": [
+   [
+    800,
+    "/images/optimized/pilar/jersey-navy-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/pilar/jersey-navy-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/pilar/jersey-navy-2400.webp"
+   ]
+  ]
+ },
+ "pilar/jersey-white": {
+  "width": 7746,
+  "height": 4904,
+  "files": [
+   [
+    800,
+    "/images/optimized/pilar/jersey-white-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/pilar/jersey-white-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/pilar/jersey-white-2400.webp"
+   ]
+  ]
+ },
+ "driven/classics": {
+  "width": 4500,
+  "height": 3000,
+  "files": [
+   [
+    800,
+    "/images/optimized/driven/classics-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/driven/classics-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/driven/classics-2400.webp"
+   ]
+  ]
+ },
+ "driven/touge": {
+  "width": 3000,
+  "height": 1688,
+  "files": [
+   [
+    800,
+    "/images/optimized/driven/touge-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/driven/touge-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/driven/touge-2400.webp"
+   ]
+  ]
+ },
+ "driven/offroad": {
+  "width": 3000,
+  "height": 1688,
+  "files": [
+   [
+    800,
+    "/images/optimized/driven/offroad-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/driven/offroad-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/driven/offroad-2400.webp"
+   ]
+  ]
+ },
+ "driven/nail": {
+  "width": 3000,
+  "height": 1688,
+  "files": [
+   [
+    800,
+    "/images/optimized/driven/nail-800.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/driven/nail-1600.webp"
+   ],
+   [
+    2400,
+    "/images/optimized/driven/nail-2400.webp"
+   ]
+  ]
+ },
+ "jci/board-2": {
+  "width": 2048,
+  "height": 2048,
+  "files": [
+   [
+    640,
+    "/images/optimized/jci/board-2-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/jci/board-2-1200.webp"
+   ],
+   [
+    2048,
+    "/images/optimized/jci/board-2-2048.webp"
+   ]
+  ]
+ },
+ "jci/board-3": {
+  "width": 2048,
+  "height": 2048,
+  "files": [
+   [
+    640,
+    "/images/optimized/jci/board-3-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/jci/board-3-1200.webp"
+   ],
+   [
+    2048,
+    "/images/optimized/jci/board-3-2048.webp"
+   ]
+  ]
+ },
+ "jci/board-4": {
+  "width": 2048,
+  "height": 2048,
+  "files": [
+   [
+    640,
+    "/images/optimized/jci/board-4-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/jci/board-4-1200.webp"
+   ],
+   [
+    2048,
+    "/images/optimized/jci/board-4-2048.webp"
+   ]
+  ]
+ },
+ "jci/board-5": {
+  "width": 2048,
+  "height": 2048,
+  "files": [
+   [
+    640,
+    "/images/optimized/jci/board-5-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/jci/board-5-1200.webp"
+   ],
+   [
+    2048,
+    "/images/optimized/jci/board-5-2048.webp"
+   ]
+  ]
+ },
+ "jci/board-7": {
+  "width": 2048,
+  "height": 2048,
+  "files": [
+   [
+    640,
+    "/images/optimized/jci/board-7-640.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/jci/board-7-1200.webp"
+   ],
+   [
+    2048,
+    "/images/optimized/jci/board-7-2048.webp"
+   ]
+  ]
+ },
+ "site/portrait": {
+  "width": 1365,
+  "height": 2048,
+  "files": [
+   [
+    480,
+    "/images/optimized/site/portrait-480.webp"
+   ],
+   [
+    800,
+    "/images/optimized/site/portrait-800.webp"
+   ],
+   [
+    1200,
+    "/images/optimized/site/portrait-1200.webp"
+   ]
+  ]
+ },
+ "site/logo": {
+  "width": 1080,
+  "height": 1080,
+  "files": [
+   [
+    160,
+    "/images/optimized/site/logo-160.webp"
+   ],
+   [
+    320,
+    "/images/optimized/site/logo-320.webp"
+   ]
+  ]
+ }
+}
