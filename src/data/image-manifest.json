@@ -750,5 +750,41 @@
     "/images/optimized/site/logo-320.webp"
    ]
   ]
+ },
+ "boelou/static-ad": {
+  "width": 4500,
+  "height": 4500,
+  "files": [
+   [
+    640,
+    "/images/optimized/boelou/static-ad-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/boelou/static-ad-1080.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/boelou/static-ad-1600.webp"
+   ]
+  ]
+ },
+ "revere-estates/social-post": {
+  "width": 4500,
+  "height": 5625,
+  "files": [
+   [
+    640,
+    "/images/optimized/revere-estates/social-post-640.webp"
+   ],
+   [
+    1080,
+    "/images/optimized/revere-estates/social-post-1080.webp"
+   ],
+   [
+    1600,
+    "/images/optimized/revere-estates/social-post-1600.webp"
+   ]
+  ]
  }
 }

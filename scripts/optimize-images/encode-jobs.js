@@ -6,6 +6,8 @@ window.__enc = { done: 0, total: 0, errors: [], manifest: {}, finished: false }
   const big = [800, 1600, 2400]
   const jobs = [
     // key, source, crop [x,y,w,h] or null, widths, quality
+    ['boelou/static-ad', P + 'boelou/boelou-static-ad.png', null, [640, 1080, 1600], 0.88],
+    ['revere-estates/social-post', P + 'revere-estates/revere-estates-social-media.png', null, [640, 1080, 1600], 0.88],
     ['aersoak/range', P + 'branding/aersoak-presentation.png', [0, 830, 3146, 817], big, 0.84],
     ['aersoak/label', P + 'branding/aersoak-presentation.png', [0, 0, 3146, 818], big, 0.88],
     ['astova/dark-range', P + 'branding/astova-dark-presentation.png', [0, 815, 2291, 815], [800, 1600, 2291], 0.84],

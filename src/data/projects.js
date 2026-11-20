@@ -10,6 +10,72 @@
 
 const projectList = [
   {
+    "slug": "boelou",
+    "title": "Boelou",
+    "type": "Social Media Posting",
+    "summary": "A square social media ad combining a dog portrait, product imagery, and a bold shop call to action.",
+    "overview": "A static social media post for Boelou featuring a dog resting on a blanket, diffuser and refill imagery, and the headline “A little plug. A calmer home.” Teal, deep green, and yellow organize the product message and shopping call to action.",
+    "deliverables": [
+      "Square social media post"
+    ],
+    "designNotes": [
+      "A resting dog and a soft interior backdrop set a calm visual tone.",
+      "Oversized product imagery and a yellow trial badge create a clear focal point.",
+      "The dark green shop button and website address anchor the bottom of the layout."
+    ],
+    "cover": {
+      "image": "boelou/static-ad",
+      "alt": "Boelou square social media ad with a resting dog, a white diffuser and yellow refill bottles, the headline “A little plug. A calmer home.”, a 30-day trial badge, and a Shop Now button",
+      "position": "50% 50%"
+    },
+    "sections": [
+      {
+        "title": "Social media post",
+        "layout": "hero",
+        "items": [
+          {
+            "image": "boelou/static-ad",
+            "alt": "Boelou square social media ad with a resting dog, a white diffuser and yellow refill bottles, the headline “A little plug. A calmer home.”, a 30-day trial badge, and a Shop Now button",
+            "caption": "Boelou — square static social media ad."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "revere-estates",
+    "title": "Revere Estates",
+    "type": "Social Media Posting",
+    "summary": "A portrait social media graphic presenting short-term rental management with property photography and four service highlights.",
+    "overview": "A social media post for Revere Estates built around the headline “Your Property. Expertly Managed.” A blue-and-gold palette frames property photography, four service cards, and a call to discover the property’s potential.",
+    "deliverables": [
+      "Portrait social media post"
+    ],
+    "designNotes": [
+      "Gold branding and a fine divider stand out against the blue sky background.",
+      "Four rounded photo cards highlight revenue strategy, guest experience, property care, and owner communication.",
+      "A large property photograph leads down to the gold call-to-action bar and website address."
+    ],
+    "cover": {
+      "image": "revere-estates/social-post",
+      "alt": "Revere Estates portrait social media graphic with a gold logo, “Your Property. Expertly Managed.” headline, four property-management service cards, a house photograph, and a gold call-to-action bar",
+      "position": "50% 50%"
+    },
+    "sections": [
+      {
+        "title": "Social media post",
+        "layout": "hero",
+        "items": [
+          {
+            "image": "revere-estates/social-post",
+            "alt": "Revere Estates portrait social media graphic with a gold logo, “Your Property. Expertly Managed.” headline, four property-management service cards, a house photograph, and a gold call-to-action bar",
+            "caption": "Revere Estates — short-term rental management social media post."
+          }
+        ]
+      }
+    ]
+  },
+  {
     slug: 'aersoak',
     title: 'Aersoak',
     type: 'Packaging design',
@@ -437,6 +503,8 @@ const order = [
   'astova',
   'bellows-labs',
   'streamingmeme',
+  'boelou',
+  'revere-estates',
   'pilar-college',
   'driven-motorworks',
   'jci-zamboanga',
